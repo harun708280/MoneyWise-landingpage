@@ -9,6 +9,8 @@ import Feature from "./Component/Feature";
 import Priceing from "./Component/Priceing";
 import PricingSection from "./Component/Priceing";
 import Testimonial from "./Component/Testimonial";
+import Launch from "./Component/Launch";
+import { LampDemo } from "@/components/ui/lamp";
 
 export default function Home() {
   return (
@@ -43,6 +45,7 @@ export default function Home() {
       <Feature/>
       <PricingSection/>
       <Testimonial/>
+     <Launch/>
     </section>
   );
 }
