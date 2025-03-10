@@ -6,6 +6,8 @@ import Hero from "./Component/Hero";
 import DashBoard from "./Component/DashBoard";
 import Process from "./Component/Process";
 import Feature from "./Component/Feature";
+import Priceing from "./Component/Priceing";
+import PricingSection from "./Component/Priceing";
 
 export default function Home() {
   return (
@@ -38,6 +40,7 @@ export default function Home() {
       <DashBoard/>
       <Process/>
       <Feature/>
+      <PricingSection/>
     </section>
   );
 }

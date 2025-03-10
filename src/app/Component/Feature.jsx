@@ -62,7 +62,7 @@ const Feature = () => {
 
             {/* Feature List */}
             <Container>
-                <div className="flex container flex-col items-center justify-center py-10 md:py-20 w-full">
+                <div className="flex max-w-7xl flex-col items-center justify-center py-10 md:py-20 w-full">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
                         {features.map((feature, index) => (
                             <div key={index} className="flex flex-col items-start lg:items-start px-0 md:px-0">
