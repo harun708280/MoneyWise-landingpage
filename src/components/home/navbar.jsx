@@ -12,7 +12,7 @@ const Navbar= () => {
                 <div className="flex items-center justify-between h-full mx-auto md:max-w-screen-xl">
                     <div className="flex items-start">
                         <Link href="/" className="flex items-center gap-2">
-                            {/* <Icons.logo className="w-8 h-8" /> */}
+                           
                             <div className="w-8 h-8">
                                 <Image src={'/icon.png'} height={32} width={32}  alt='logo'></Image>
 
