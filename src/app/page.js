@@ -8,6 +8,7 @@ import Process from "./Component/Process";
 import Feature from "./Component/Feature";
 import Priceing from "./Component/Priceing";
 import PricingSection from "./Component/Priceing";
+import Testimonial from "./Component/Testimonial";
 
 export default function Home() {
   return (
@@ -41,6 +42,7 @@ export default function Home() {
       <Process/>
       <Feature/>
       <PricingSection/>
+      <Testimonial/>
     </section>
   );
 }
