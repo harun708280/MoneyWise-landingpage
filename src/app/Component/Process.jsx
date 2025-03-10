@@ -24,6 +24,7 @@ const steps = [
 const Process = () => {
   return (
     <div className="flex flex-col items-center justify-center py-12 relative">
+        
       <Container>
         <div className="max-w-xl mx-auto text-start md:text-center">
           <SectionBadge title="The Process" />

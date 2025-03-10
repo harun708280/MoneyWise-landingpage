@@ -24,6 +24,8 @@ const columns = [
 const Testimonial = () => {
   return (
     <div className="flex flex-col items-center justify-center py-16 relative">
+         <div className="hidden lg:block absolute -top-1/3 -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
+        
       {/* Section Header */}
       <Container>
         <div className="max-w-2xl mx-auto text-center">

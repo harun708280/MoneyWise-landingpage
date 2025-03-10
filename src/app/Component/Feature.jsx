@@ -41,6 +41,8 @@ const features = [
 const Feature = () => {
     return (
         <div className="flex flex-col  items-center justify-center py-12 relative">
+             <div className="hidden lg:block absolute -top-1/3 -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
+             <div className="hidden lg:block absolute bottom-0 -left-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
             <Container>
                 <div className="max-w-xl mx-auto text-start md:text-center">
                     <SectionBadge title="Features" />

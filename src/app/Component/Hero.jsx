@@ -1,3 +1,4 @@
+import Container from "@/components/global/container";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -5,9 +6,11 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col items-center mt-8 max-w-3xl w-11/12 md:w-full">
+   
+     <div className="flex flex-col items-center mt-8 max-w-3xl w-11/12 md:w-full">
+        <Container>
       <h1 className="text-4xl md:text-6xl lg:textxl md:!leading-snug font-semibold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
-        Build your next idea and ship your dream site
+      Work Smarter, Not Harder – Your Tasks, Simplified
       </h1>
       <p className="text-base text-gray-300 md:text-lg  mt-6 text-center">
         Zero code, maximum speed. Make professional sites easy, fast and fun
@@ -23,14 +26,16 @@ const Hero = () => {
           </p>
           <Button
             size="sm"
-            className="rounded-full hidden lg:flex border border-foreground/20"
+            className="rounded-full hidden bg-blue-500 lg:flex border border-foreground/20"
           >
             Get Started
             <ArrowRight className="w-4 h-4 ml-1" />
           </Button>
         </Link>
       </div>
+      </Container>
     </div>
+ 
   );
 };
 
