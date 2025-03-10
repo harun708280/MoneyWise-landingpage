@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Hero from "./Component/Hero";
+import DashBoard from "./Component/DashBoard";
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
         </button>
       </div>
       <Hero></Hero>
+      <DashBoard/>
     </section>
   );
 }
