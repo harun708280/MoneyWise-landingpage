@@ -5,6 +5,7 @@ import Image from "next/image";
 import Hero from "./Component/Hero";
 import DashBoard from "./Component/DashBoard";
 import Process from "./Component/Process";
+import Feature from "./Component/Feature";
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
       <Hero></Hero>
       <DashBoard/>
       <Process/>
+      <Feature/>
     </section>
   );
 }

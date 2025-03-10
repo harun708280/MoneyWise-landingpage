@@ -9,13 +9,13 @@ const DashBoard = () => {
       <div className="absolute top-1/2 left-1/2 -z-10 w-3/4 h-3/4 -translate-x-1/2 -translate-y-1/2 blur-[10rem] gradient opacity-50"></div>
 
       {/* Image Container */}
-      <div className="p-4 bg-opacity-50 backdrop-blur-3xl rounded-2xl shadow-xl">
+      <div className="p-4  bg-opacity-50 backdrop-blur-3xl rounded-2xl shadow-xl">
         <Image
           src="/dashboard.svg"
           alt="Dashboard Banner"
           width={1200}
           height={800}
-          className="rounded-lg shadow-2xl mx-auto"
+          className="rounded-lg  shadow-2xl mx-auto"
         />
 
         {/* BorderBeam Effect */}
