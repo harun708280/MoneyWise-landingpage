@@ -4,6 +4,7 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Hero from "./Component/Hero";
 import DashBoard from "./Component/DashBoard";
+import Process from "./Component/Process";
 
 export default function Home() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
       </div>
       <Hero></Hero>
       <DashBoard/>
+      <Process/>
     </section>
   );
 }
