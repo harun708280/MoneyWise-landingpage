@@ -20,7 +20,7 @@ const Navbar = () => {
                     alt="logo"
                   ></Image>
                 </div>
-                <span className="text-lg font-medium">Wave Work</span>
+                <span className="text-lg font-medium">Money Wise</span>
               </Link>
             </div>
             <nav className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -47,7 +47,7 @@ const Navbar = () => {
                 Login
               </Link>
               <Link
-                href="/sign-up"
+                href="/dashboard"
                 className="bg-blue-500 px-3 py-1 rounded-lg font-semibold"
               >
                 Start free trial
