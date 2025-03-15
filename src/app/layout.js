@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -13,15 +16,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 export default function Layout({ children }) {
+  const pathname = usePathname(); // Get current path
+
+  // Condition to check if path includes "dashboard"
+  const isDashboard = pathname.includes("dashboard");
+
   return (
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-gray-950 text-white antialiased max-w-full overflow-x-hidden",
+          "min-h-screen text-white antialiased max-w-full overflow-x-hidden",
           geistSans.variable,
-          geistMono.variable
+          geistMono.variable,
+          !isDashboard && "bg-gray-950" // Apply bg-gray-950 only if NOT on dashboard
         )}
       >
         <RootLayoutClient>{children}</RootLayoutClient>
