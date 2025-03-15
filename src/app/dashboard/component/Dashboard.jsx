@@ -40,13 +40,13 @@ export default function Page() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-4">
-            <div className="bg-blue-500 rounded-xl text-center">
+          <div className="grid  gap-4 grid-cols-1 md:grid-cols-4">
+            <div className="bg-blue-500 aspect-video rounded-xl text-center">
                 
             </div>
             <div className="aspect-video rounded-xl bg-pink-600/50" />
             <div className="aspect-video rounded-xl bg-amber-600/50" />
-            <div className="bg-blue-500 rounded-xl text-center">
+            <div className="bg-blue-500 rounded-xl aspect-video text-center">
                 
             </div>
           </div>

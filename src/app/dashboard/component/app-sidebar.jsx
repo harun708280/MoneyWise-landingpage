@@ -1,18 +1,6 @@
 "use client"
 
 import React from "react";
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react";
 
 
 
@@ -28,6 +16,7 @@ import { NavMain } from "./nav-main";
 import { NavProjects } from "./nav-project";
 import { TeamSwitcher } from "./team-switcheer";
 import { NavUser } from "./nav-user";
+import { CalendarCheck, GalleryVerticalEnd, HelpCircle, LayoutDashboard, ListChecks, Settings, Target, TrendingUp, Wallet } from "lucide-react";
 
 // This is sample data.
 const data = {
@@ -46,86 +35,157 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "Dashboard",
       url: "#",
-      icon: SquareTerminal,
+      icon: LayoutDashboard,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Overview",
+          url: "/dashboard	",
+        },
+        
+      ],
+    },
+    {
+      title: "Transactions ",
+      url: "#",
+      icon: ListChecks,
+      items: [
+        {
+          title: "All Transactions",
+          url: "/transactions",
+        },
+        {
+          title: "Income Transactions",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Expense Transactions",
           url: "#",
         },
         {
-          title: "Settings",
+          title: "Add Transaction",
+          url: "#",
+        },
+        {
+          title: "Edit Transaction",
           url: "#",
         },
       ],
     },
     {
-      title: "Models",
+      title: "Accounts & Wallets",
       url: "#",
-      icon: Bot,
+      icon: Wallet,
       items: [
         {
-          title: "Genesis",
+          title: "All Accounts",
           url: "#",
         },
         {
-          title: "Explorer",
+          title: "Add Account",
           url: "#",
         },
         {
-          title: "Quantum",
+          title: "Edit Account	",
           url: "#",
         },
+       
       ],
     },
     {
-      title: "Documentation",
+      title: "Budgets & Goals ",
       url: "#",
-      icon: BookOpen,
+      icon: Target,
       items: [
         {
-          title: "Introduction",
+          title: "All Budgets",
           url: "#",
         },
         {
-          title: "Get Started",
+          title: "Add Budget",
           url: "#",
         },
         {
-          title: "Tutorials",
+          title: "Edit Budget	",
           url: "#",
         },
         {
-          title: "Changelog",
+          title: "Financial Goals	",
           url: "#",
         },
+        {
+          title: "Add Goal",
+          url: "#",
+        },
+       
+      ],
+    },
+    {
+      title: "Reports & Analytics",
+      url: "#",
+      icon: TrendingUp,
+      items: [
+        {
+          title: "Financial Reports",
+          url: "#",
+        },
+        {
+          title: "Monthly Reports",
+          url: "#",
+        },
+        {
+          title: "Annual Reports	",
+          url: "#",
+        },
+        {
+          title: "Category-wise Reports	",
+          url: "#",
+        },
+       
+      ],
+    },
+    {
+      title: "Reminders & Bills",
+      url: "#",
+      icon: CalendarCheck,
+      items: [
+        {
+          title: "All Bills & Payments",
+          url: "#",
+        },
+        {
+          title: "Add Bill",
+          url: "#",
+        },
+        {
+          title: "Bill Reminders	",
+          url: "#",
+        },
+        
+       
       ],
     },
     {
       title: "Settings",
       url: "#",
-      icon: Settings2,
+      icon: Settings,
       items: [
         {
           title: "General",
           url: "#",
         },
         {
-          title: "Team",
+          title: "Profile Settings",
           url: "#",
         },
         {
-          title: "Billing",
+          title: "Security Settings",
           url: "#",
         },
         {
-          title: "Limits",
+          title: "Theme Customization",
           url: "#",
         },
       ],
@@ -133,20 +193,11 @@ const data = {
   ],
   projects: [
     {
-      name: "Design Engineering",
+      name: "Help & Support ",
       url: "#",
-      icon: Frame,
+      icon:HelpCircle,
     },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
+    
   ],
 };
 
