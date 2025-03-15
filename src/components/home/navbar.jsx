@@ -40,12 +40,12 @@ const Navbar = () => {
               </ul>
             </nav>
             <div className="flex items-center gap-4">
-              <Link
+              {/* <Link
                 href="/sign-in"
                 className={buttonVariants({ size: "sm", variant: "ghost" })}
               >
                 Login
-              </Link>
+              </Link> */}
               <Link
                 href="/dashboard"
                 className="bg-blue-500 px-3 py-1 rounded-lg font-semibold"
