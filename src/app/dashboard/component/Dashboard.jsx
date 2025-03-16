@@ -27,7 +27,7 @@ export default function Page() {
             <div className="bg-blue-500 aspect-video rounded-xl text-center">
                 
             </div>
-            <div className="aspect-video rounded-xl bg-pink-600/50" />
+            <div className="aspect-video rounded-xl bg-pink-600/50 dark:bg-green-600" />
             <div className="aspect-video rounded-xl bg-amber-600/50" />
             <div className="bg-blue-500 rounded-xl aspect-video text-center">
                 
