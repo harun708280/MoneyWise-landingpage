@@ -6,13 +6,17 @@ import Footer from "@/components/home/Footer";
 
 export default function RootLayoutClient({ children }) {
   const pathname = usePathname(); // Get current path
-  const isDashboard = pathname.startsWith("/dashboard"); // Check if it's dashboard
+  const isDashboard = pathname.startsWith("/dashboard"); // Check if it's Dashboard
+  const isSignIn = pathname.startsWith("/sign-in"); // Check if it's Sign-in Page
+  const isSignUp = pathname.startsWith("/sign-up"); // Check if it's Sign-up Page
+
+  const shouldShowNavbarFooter = !(isDashboard || isSignIn || isSignUp); // ✅ Proper Condition
 
   return (
     <>
-      {!isDashboard && <Navbar />} {/* Hide Navbar if on Dashboard */}
+      {shouldShowNavbarFooter && <Navbar />} {/* Show Navbar only if not in Dashboard, Sign-in, or Sign-up */}
       {children}
-      {!isDashboard && <Footer />} {/* Hide Footer if on Dashboard */}
+      {shouldShowNavbarFooter && <Footer />} {/* Show Footer only if not in Dashboard, Sign-in, or Sign-up */}
     </>
   );
 }

@@ -1,0 +1,122 @@
+"use client";
+
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { PlusCircle } from "lucide-react";
+import { useState } from "react";
+
+export default function AddTransaction() {
+  const [activeTab, setActiveTab] = useState("expense");
+
+  const categories = {
+    expense: [
+      { name: "Food", color: "#FF6347" },
+      { name: "Shopping", color: "#FFA500" },
+      { name: "Transport", color: "#4682B4" },
+      { name: "Health", color: "#32CD32" },
+      { name: "Entertainment", color: "#8A2BE2" },
+      { name: "Education", color: "#FFD700" },
+      { name: "Bills", color: "#DC143C" },
+      { name: "Subscriptions", color: "#00CED1" },
+      { name: "Investment", color: "#556B2F" },
+      { name: "Family", color: "#FF69B4" },
+      { name: "Others", color: "#808080" }
+    ],
+    income: [
+      { name: "Salary", color: "#32CD32" },
+      { name: "Freelancing", color: "#4682B4" },
+      { name: "Investments", color: "#FFD700" },
+      { name: "Business", color: "#FFA500" },
+      { name: "Rental Income", color: "#8A2BE2" },
+      { name: "Dividends", color: "#00CED1" },
+      { name: "Gifts", color: "#DC143C" },
+      { name: "Grants", color: "#556B2F" },
+      { name: "Bonuses", color: "#FF6347" },
+      { name: "Family", color: "#FF69B4" },
+      { name: "Others", color: "#808080" }
+    ]
+  };
+
+  const initialValues = {
+    type: activeTab,
+    amount: "",
+    category: "",
+    note: "",
+    date: new Date().toISOString().split("T")[0],
+  };
+
+  const validationSchema = Yup.object({
+    amount: Yup.number().positive("Amount must be positive").required("Amount is required"),
+    category: Yup.string().required("Category is required"),
+    note: Yup.string(),
+    date: Yup.date().required("Date is required"),
+  });
+
+  const handleSubmit = (values, { resetForm }) => {
+    console.log("Transaction Added:", values);
+    alert("Transaction Added Successfully!");
+    resetForm();
+  };
+
+  return (
+    <div className="max-w-xl mx-auto p-6 rounded-lg shadow-md bg-muted/50 ">
+      <h2 className="text-xl font-bold mb-4">Add New Transaction</h2>
+
+      {/* Tab System */}
+      <div className="flex mb-4">
+        <button onClick={() => setActiveTab("expense")} className={`flex-1 p-2 rounded-l-md ${activeTab === "expense" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"}`}>Expense</button>
+        <button onClick={() => setActiveTab("income")} className={`flex-1 p-2 rounded-r-md ${activeTab === "income" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"}`}>AddMoney</button>
+      </div>
+
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, values }) => (
+          <Form>
+            <div className="mb-4">
+              <label className="block font-semibold">Amount</label>
+              <Field type="number" name="amount" className="w-full p-2 border rounded-md" />
+              <ErrorMessage name="amount" component="div" className="text-red-500 text-sm" />
+            </div>
+
+            <div className="mb-4">
+              <label className="block font-semibold">Category</label>
+              <Field as="select" name="category" className="w-full p-2 border rounded-md">
+                <option value="">Select Category</option>
+                {categories[activeTab].map((cat) => (
+                  <option key={cat.name} value={cat.name} style={{ backgroundColor: cat.color }}>
+                    {cat.name}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage name="category" component="div" className="text-red-500 text-sm" />
+            </div>
+
+            <div className="mb-4">
+              <label className="block font-semibold">Note</label>
+              <Field type="text" name="note" className="w-full p-2 border rounded-md" />
+              <ErrorMessage name="note" component="div" className="text-red-500 text-sm" />
+            </div>
+
+            <div className="mb-4">
+              <label className="block font-semibold">Date</label>
+              <Field type="date" name="date" className="w-full p-2 border rounded-md" />
+              <ErrorMessage name="date" component="div" className="text-red-500 text-sm" />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full flex items-center justify-center bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+            >
+              <PlusCircle className="mr-2" />
+              {isSubmitting ? "Adding..." : "Add Transaction"}
+            </button>
+          </Form>
+        )}
+      </Formik>
+    </div>
+  );
+}

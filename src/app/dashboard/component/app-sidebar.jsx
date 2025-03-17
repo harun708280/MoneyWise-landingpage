@@ -17,6 +17,7 @@ import { NavProjects } from "./nav-project";
 import { TeamSwitcher } from "./team-switcheer";
 import { NavUser } from "./nav-user";
 import { CalendarCheck, GalleryVerticalEnd, HelpCircle, LayoutDashboard, ListChecks, Settings, Target, TrendingUp, Wallet } from "lucide-react";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 // This is sample data.
 const data = {
@@ -54,7 +55,7 @@ const data = {
       items: [
         {
           title: "All Transactions",
-          url: "/dashboard/transactions",
+          url: "/dashboard/transactions/dashboard/transactions",
         },
         {
           title: "Income Transactions",
@@ -66,7 +67,7 @@ const data = {
         },
         {
           title: "Add Transaction",
-          url: "#",
+          url: "/dashboard/transactions/add",
         },
         {
           title: "Edit Transaction",
@@ -212,7 +213,7 @@ export function AppSidebar(props) {
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <UserButton  />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

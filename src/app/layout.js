@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import RootLayoutClient from "./RootLayoutClient"; // Import Client Component
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,17 +24,19 @@ export default function Layout({ children }) {
   const isDashboard = pathname.includes("dashboard");
 
   return (
-    <html lang="en">
+    <ClerkProvider>
+      <html lang="en">
       <body
         className={cn(
           "min-h-screen text-white antialiased max-w-full overflow-x-hidden",
           geistSans.variable,
           geistMono.variable,
-          !isDashboard && "bg-gray-950" // Apply bg-gray-950 only if NOT on dashboard
+          !isDashboard && "bg-gray-950" 
         )}
       >
         <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>
+    </ClerkProvider>
   );
 }

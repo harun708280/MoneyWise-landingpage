@@ -3,8 +3,12 @@ import Container from "../global/container";
 import Link from "next/link";
 import Image from "next/image";
 import { buttonVariants } from "../ui/button";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const { isSignedIn } = useUser();
+  const router = useRouter();
   return (
     <div>
       <header className="px-4 h-14 sticky top-0 inset-x-0 w-full  backdrop-blur-lg border-b border-gray-500 z-50">
@@ -46,12 +50,16 @@ const Navbar = () => {
               >
                 Login
               </Link> */}
-              <Link
+              {
+                isSignedIn ?<Link
                 href="/dashboard"
                 className="bg-blue-500 px-3 py-1 rounded-lg font-semibold"
               >
                 Start free trial
-              </Link>
+              </Link>:<Link href="/sign-in" className="bg-blue-500 px-4 py-1 rounded-md">
+                  Sign In
+                </Link>
+              }
             </div>
           </div>
         </Container>
