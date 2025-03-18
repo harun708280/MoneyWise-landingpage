@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Page from "./component/Dashboard";
+import Loader from "@/components/global/Loader";
 
 const MainDashboard = () => {
     const { userId, isLoaded } = useAuth(); // Clerk auth state
@@ -21,7 +22,7 @@ const MainDashboard = () => {
     }, [userId, isLoaded, router]);
 
     if (loading) {
-        return <p>লোড হচ্ছে...</p>; // লোডিং টেক্সট দেখাবে
+        return <Loader/>
     }
 
     return (
