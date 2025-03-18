@@ -3,7 +3,10 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/home/navbar";
 import Footer from "@/components/home/Footer";
+import { Provider } from "react-redux";
 
+import { store, persistor } from "@/redux/store";
+import SyncUser from "../hooks/SyncUser";
 export default function RootLayoutClient({ children }) {
   const pathname = usePathname(); // Get current path
   const isDashboard = pathname.startsWith("/dashboard"); // Check if it's Dashboard
@@ -14,9 +17,16 @@ export default function RootLayoutClient({ children }) {
 
   return (
     <>
-      {shouldShowNavbarFooter && <Navbar />} {/* Show Navbar only if not in Dashboard, Sign-in, or Sign-up */}
-      {children}
-      {shouldShowNavbarFooter && <Footer />} {/* Show Footer only if not in Dashboard, Sign-in, or Sign-up */}
+      {shouldShowNavbarFooter && <Navbar />}{" "}
+      {/* Show Navbar only if not in Dashboard, Sign-in, or Sign-up */}
+      <Provider store={store}>
+     
+        <SyncUser /> {/* Clerk User Data Redux Store-এ Save করবে */}
+        {children}
+      
+    </Provider>
+      {shouldShowNavbarFooter && <Footer />}{" "}
+      {/* Show Footer only if not in Dashboard, Sign-in, or Sign-up */}
     </>
   );
 }

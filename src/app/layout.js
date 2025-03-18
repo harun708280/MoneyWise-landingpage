@@ -26,17 +26,17 @@ export default function Layout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-      <body
-        className={cn(
-          "min-h-screen text-white antialiased max-w-full overflow-x-hidden",
-          geistSans.variable,
-          geistMono.variable,
-          !isDashboard && "bg-gray-950" 
-        )}
-      >
-        <RootLayoutClient>{children}</RootLayoutClient>
-      </body>
-    </html>
+        <body
+          className={cn(
+            "min-h-screen text-white antialiased max-w-full overflow-x-hidden",
+            geistSans.variable,
+            geistMono.variable,
+            !isDashboard && "bg-gray-950"
+          )}
+        >
+          <RootLayoutClient>{children}</RootLayoutClient>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

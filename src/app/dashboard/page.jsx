@@ -9,20 +9,22 @@ import Loader from "@/components/global/Loader";
 const MainDashboard = () => {
     const { userId, isLoaded } = useAuth(); // Clerk auth state
     const router = useRouter();
-    const [loading, setLoading] = useState(true); // লোডিং স্টেট
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
         if (isLoaded) {
             if (!userId) {
-                router.push("/sign-in"); // লগ ইন না থাকলে Sign-in পেজে পাঠাবে
+                router.push("/sign-in"); 
             } else {
-                setLoading(false); // ইউজার থাকলে লোডিং বন্ধ করবে
+                setTimeout(() => { 
+                    setLoading(false);
+                }, 2000);
             }
         }
     }, [userId, isLoaded, router]);
 
     if (loading) {
-        return <Loader/>
+        return <Loader/>; 
     }
 
     return (
