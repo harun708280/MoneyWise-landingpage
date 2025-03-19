@@ -9,12 +9,12 @@ export const userApi=baseApi.injectEndpoints({
                 method:'POST',
                 body:userData
             }),
-            invalidatesTags:["Users"]
+           
         }),
-        // getUserByEmail:builder.query({
-        //     query:(email)=>`/users/${email}`,
-        //     providesTags:["Users"]
-        // }),
+        getUserByEmail:builder.query({
+            query:(email)=>`/users/${email}`,
+            // providesTags:["Users"]
+        }),
         // getAllUser:builder.query({
         //     query:()=>'/users',
         //     providesTags:["Users"]
@@ -23,4 +23,4 @@ export const userApi=baseApi.injectEndpoints({
     })
 })
 
-export const {useRegisterUserMutation}=userApi
+export const {useRegisterUserMutation,useGetUserByEmailQuery}=userApi

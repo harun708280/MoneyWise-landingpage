@@ -6,6 +6,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import RootLayoutClient from "./RootLayoutClient"; // Import Client Component
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function Layout({ children }) {
           )}
         >
           <RootLayoutClient>{children}</RootLayoutClient>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
