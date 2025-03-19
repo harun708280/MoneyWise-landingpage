@@ -135,3 +135,12 @@
 .animate-spin-slow {
   animation: spin-slow 2s linear infinite;
 }
+:root {
+  --color-chrome: #ff9800;
+  --color-safari: #03a9f4;
+  --color-firefox: #ff5722;
+  --color-edge: #4caf50;
+  --color-other: #9c27b0;
+  --chart-1: #ff9800; /* Chrome */
+  --chart-2: #03a9f4; /* Safari */
+}

@@ -11,7 +11,7 @@ const DashBoard = () => {
       {/* Image Container */}
       <div className="p-4  bg-opacity-50 backdrop-blur-3xl rounded-2xl shadow-xl">
         <Image
-          src="/dashBoard.png"
+          src="/demoDash.png"
           alt="Dashboard Banner"
           width={1200}
           height={800}

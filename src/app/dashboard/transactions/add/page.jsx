@@ -137,7 +137,7 @@ export default function AddTransaction() {
         <button
           onClick={() => setActiveTab("expense")}
           className={`flex-1 p-2 rounded-l-md ${
-            activeTab === "expense" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"
+            activeTab === "expense" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-700"
           }`}
         >
           Expense
@@ -145,7 +145,7 @@ export default function AddTransaction() {
         <button
           onClick={() => setActiveTab("income")}
           className={`flex-1 p-2 rounded-r-md ${
-            activeTab === "income" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"
+            activeTab === "income" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-700"
           }`}
         >
           AddMoney
