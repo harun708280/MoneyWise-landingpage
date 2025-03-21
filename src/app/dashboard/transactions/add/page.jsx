@@ -13,7 +13,7 @@ import { toast } from "sonner";
 export default function AddTransaction() {
   const [activeTab, setActiveTab] = useState("expense");
   const { user, isSignedIn } = useUser();
-  console.log(activeTab);
+  
   
 
   // Get user email safely
@@ -129,8 +129,8 @@ export default function AddTransaction() {
 
 
   return (
-    <div className="max-w-xl mx-auto p-6 rounded-lg shadow-md bg-muted/50">
-      <h2 className="text-xl font-bold mb-4">Add New Transaction</h2>
+    <div className="">
+      
 
       {/* Tab System */}
       <div className="flex mb-4">

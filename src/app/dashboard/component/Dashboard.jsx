@@ -18,6 +18,7 @@ import CompareDaily from "./CompareDaily"
 import DailyCost from "./DailyCost"
 import IncomeExpense  from "./IncomeExpense"
 import Money from "./Money"
+import { SectionCards } from "./SectionCards"
 
 
 export default function Page() {
@@ -27,6 +28,9 @@ export default function Page() {
       <SidebarInset>
         
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <div className="">
+          <SectionCards/>
+          </div>
           <div className="grid  gap-4 grid-cols-1 md:grid-cols-3">
             <div className="bg-blue-500 aspect-video rounded-xl text-center">
                 <Money/>
