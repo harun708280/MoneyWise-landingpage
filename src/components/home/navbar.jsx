@@ -53,10 +53,10 @@ const Navbar = () => {
               {
                 isSignedIn ?<Link
                 href="/dashboard"
-                className="bg-blue-500 px-3 py-1 rounded-lg font-semibold"
+                className="bg-gradient-to-r  from-blue-900 to-blue-500 px-3 py-1 rounded-lg font-semibold"
               >
                 Start free trial
-              </Link>:<Link href="/sign-in" className="bg-blue-500 px-4 py-1 rounded-md">
+              </Link>:<Link href="/sign-in" className="bg-gradient-to-r  from-blue-900 to-blue-500 px-4 py-1 rounded-md">
                   Sign In
                 </Link>
               }

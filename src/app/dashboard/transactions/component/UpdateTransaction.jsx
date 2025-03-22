@@ -6,8 +6,11 @@ import { PlusCircle } from "lucide-react";
 import { useState } from "react";
 
 import Loading from "../loading";
+import { useUpdateTransactionMutation } from "@/redux/Api/transaction";
+import { toast } from "sonner";
 
 const UpdateTransaction=({setIsOpen,isOpen,txn})=> {
+    const [updateTransaction]=useUpdateTransactionMutation()
  
   const activeTab=txn.type
   console.log(txn);
@@ -63,16 +66,26 @@ const UpdateTransaction=({setIsOpen,isOpen,txn})=> {
 
   // Handle form submission
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-    // You can handle your form submission here (API call, etc.)
-
-    // Simulate success response
-    console.log("Form Data:", values);
-    resetForm();
-    setSubmitting(false);
+    try {
+     
+      await updateTransaction({ id: txn._id, updatedData: values }); 
+      resetForm();
+      toast.success('Successfully updated done', {
+        style: {
+         
+          color: 'green',
+        
+        },
+      });
+      setIsOpen(false)
+    } catch (er) {
+      toast.error('Something went wrong');
+    } finally {
+      setSubmitting(false);
+    }
   };
-
   return (
-    <div className="">
+    <div className="z-50">
       {/* Tab System */}
       <div className="flex mb-4 text-black">
         <button

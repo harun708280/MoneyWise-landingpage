@@ -25,9 +25,18 @@ export const transactionApi = baseApi.injectEndpoints({
     }),
     singleTransaction:builder.query({
       query:(id)=>`/transactions/${id}`,
-    })
-
+    }),
+    updateTransaction: builder.mutation({ 
+      query: ({ id, updatedData }) => ({
+        url: `/transactions/edit/${id}`,
+        method: "PUT",
+        body: updatedData,
+      }),
+      invalidatesTags: ["userTransactions"],
+    }),
   }),
+
+  
 });
 
-export const { useAddTransactionMutation,useAllTransactionByEmailQuery,useDeleteTransactionMutation,useSingleTransactionQuery} = transactionApi;
+export const { useAddTransactionMutation,useAllTransactionByEmailQuery,useDeleteTransactionMutation,useSingleTransactionQuery,useUpdateTransactionMutation} = transactionApi;
