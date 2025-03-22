@@ -13,7 +13,7 @@ export const transactionApi = baseApi.injectEndpoints({
       invalidatesTags:["userTransactions"]
     }),
     allTransactionByEmail:builder.query({
-      query:(email)=>`/transactions/${email}`,
+      query:(email)=>`/transactions/email/${email}`,
       providesTags: ["userTransactions"], 
     }),
     deleteTransaction: builder.mutation({
@@ -23,8 +23,11 @@ export const transactionApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["userTransactions"],
     }),
+    singleTransaction:builder.query({
+      query:(id)=>`/transactions/${id}`,
+    })
 
   }),
 });
 
-export const { useAddTransactionMutation,useAllTransactionByEmailQuery,useDeleteTransactionMutation } = transactionApi;
+export const { useAddTransactionMutation,useAllTransactionByEmailQuery,useDeleteTransactionMutation,useSingleTransactionQuery} = transactionApi;

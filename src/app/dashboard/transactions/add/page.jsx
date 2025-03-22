@@ -137,7 +137,7 @@ export default function AddTransaction() {
         <button
           onClick={() => setActiveTab("expense")}
           className={`flex-1 p-2 rounded-l-md ${
-            activeTab === "expense" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-700"
+            activeTab === "expense" ? "bg-gradient-to-r  from-blue-900 to-blue-500 text-white" : "bg-gray-100 text-gray-700"
           }`}
         >
           Expense
@@ -145,7 +145,7 @@ export default function AddTransaction() {
         <button
           onClick={() => setActiveTab("income")}
           className={`flex-1 p-2 rounded-r-md ${
-            activeTab === "income" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-700"
+            activeTab === "income" ? "bg-gradient-to-r  from-blue-900 to-blue-500 text-white" : "bg-gray-100 text-gray-700"
           }`}
         >
           AddMoney
@@ -189,7 +189,7 @@ export default function AddTransaction() {
             <button
               type="submit"
               
-              className="w-full flex items-center justify-center bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+              className="w-full flex items-center justify-center bg-gradient-to-r  from-blue-900 to-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
             >
               <PlusCircle className="mr-2" />
              {addTransactionLoad?'Loading....':'Add'}
