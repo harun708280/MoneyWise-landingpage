@@ -12,9 +12,9 @@ export const transactionApi = baseApi.injectEndpoints({
       }),
       invalidatesTags:["userTransactions"]
     }),
-    allTransactionByEmail:builder.query({
-      query:(email)=>`/transactions/email/${email}`,
-      providesTags: ["userTransactions"], 
+    allTransactionByEmail: builder.query({
+      query: ({ email, type }) => `/transactions/email/${email}?type=${type || ''}`,
+      providesTags: ["userTransactions"],
     }),
     deleteTransaction: builder.mutation({
       query: (id) => ({

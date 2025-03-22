@@ -202,4 +202,6 @@
     --chart-5: 340 75% 55%;
   }
 }
-
+.my-element.active {
+  color: red !important;
+}
