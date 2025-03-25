@@ -35,6 +35,8 @@ export default function TransactionsPage() {
     return <Loader />;
   }
 
+  
+
   const confirmDeleteTransaction = (id) => {
     toast("Are you sure you want to delete this?", {
       duration: 5000,
@@ -60,13 +62,13 @@ export default function TransactionsPage() {
 
   return (
     <Tabs defaultValue="all" onValueChange={setSelectedTab}>
-      <div className="p-6 bg-muted/50 min-h-screen text-black max-w-7xl w-full mx-auto rounded-2xl">
-        <div className="p-4 shadow rounded-md">
+      <div className="p-6  min-h-screen text-black  w-full mx-auto rounded-2xl">
+        <div className="p-4 shadow bg-white rounded-md">
           <h2 className="text-xl font-bold mb-4">Transactions</h2>
 
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-between items-center mb-4">
             <TabsList className="grid w-1/3 grid-cols-3 bg-gradient-to-r from-blue-900 to-blue-500">
-              <TabsTrigger value="all"className={`${selectedTab==='all'?'text-black':'text-white'}`}>
+              <TabsTrigger value="all"className={`${selectedTab==='all'?'text-black ':'text-white'}`}>
                 All Transactions
               </TabsTrigger>
               <TabsTrigger value="Income" className={`${selectedTab==='Income'?'text-black':'text-white'}`}>

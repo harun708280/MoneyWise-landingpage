@@ -25,9 +25,9 @@ export default function Page() {
   return (
     
      
-      <SidebarInset>
+      <SidebarInset className=''>
         
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0 bg-gray-50">
           <div className="">
           <SectionCards/>
           </div>
