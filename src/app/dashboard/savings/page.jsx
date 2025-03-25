@@ -89,7 +89,7 @@ const Savings = () => {
           savingsDescription: "Saving for a new phone.",
         },
       ];
-    //   hello
+    //   hello bro
 
   const getCategoryDetails = (category) => {
     switch (category) {
