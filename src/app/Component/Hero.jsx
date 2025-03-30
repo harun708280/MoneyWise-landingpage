@@ -13,7 +13,7 @@ const Hero = () => {
       Simplify Your Finances with Our Intuitive Platform
       </h1>
       <p className="text-base text-gray-300 md:text-lg  mt-6 text-center">
-      Effortlessly manage your money, track spending, and achieve your financial goals..
+      Take control of your financial future.  Effortlessly manage your money, track spending, and achieve your financial goals with our powerful and easy-to-use tools.
       </p>
       <div className="hidden md:flex relative items-center justify-center mt-8 md:mt-12 w-full">
         <Link
