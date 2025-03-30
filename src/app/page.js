@@ -11,6 +11,8 @@ import PricingSection from "./Component/Priceing";
 import Testimonial from "./Component/Testimonial";
 import Launch from "./Component/Launch";
 import { LampDemo } from "@/components/ui/lamp";
+import Security from "./Component/Security";
+import CardPayment from "./Component/CardPayment";
 
 export default function Home() {
   return (
@@ -43,6 +45,8 @@ export default function Home() {
       <DashBoard/>
       <Process/>
       <Feature/>
+      <CardPayment/>
+      <Security/>
       <PricingSection/>
       <Testimonial/>
      <Launch/>

@@ -6,9 +6,10 @@ import Loader from "@/components/global/Loader";
 import Image from "next/image";
 import SavingDataChart from "../component/Saving";
 import TnxAddModal from "../component/TnxAddModal";
+import { Pen } from "lucide-react";
 
 const SavingDetails = () => {
-  const [isOpen,setIsOpen]=useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const params = useParams();
   const {
     data: detailsSaving,
@@ -53,10 +54,19 @@ const SavingDetails = () => {
           <p className="text-lg md:text-xl mb-4 z-20">
             {accountName} - {category}
           </p>
-          <button onClick={()=>setIsOpen(true)} className="relative inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-blue-900 to-blue-500 rounded-md hover:bg-sky-600 transition-colors duration-300 z-20">
-            <span className="absolute inset-0 rounded-md animate-ping bg-gradient-to-r from-blue-900 to-blue-500 opacity-75"></span>
-            <span className="relative">Add Savings Transactions</span>
-          </button>
+          {currentAmount !== targetAmount ? (
+            <button
+              onClick={() => setIsOpen(true)}
+              className="relative inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-blue-900 to-blue-500 rounded-md hover:bg-sky-600 transition-colors duration-300 z-20"
+            >
+              <span className="absolute inset-0 rounded-md animate-ping bg-gradient-to-r from-blue-900 to-blue-500 opacity-75"></span>
+              <span className="relative">Add Savings Transactions</span>
+            </button>
+          ) : (
+            <p className="text-2xl font-bold text-white z-20 ">
+              Already This Saving Goals Complete
+            </p>
+          )}
         </div>
         <div className="bg-black opacity-20 absolute inset-0 rounded-md"></div>
       </div>
@@ -64,7 +74,7 @@ const SavingDetails = () => {
       <div className="text-black rounded-lg shadow p-6 mb-6">
         <h3 className="text-xl font-semibold mb-4">{accountName}</h3>
         <div className="flex gap-12">
-          <table className="w-[70%] border-collapse border border-gray-300">
+          <table className="w-[70%] bg-white rounded-md border-collapse border border-gray-300">
             <tbody>
               <tr>
                 <td className="font-semibold pr-4 p-2 border border-gray-300">
@@ -128,24 +138,57 @@ const SavingDetails = () => {
       <div className="bg-white text-black rounded-lg shadow p-6">
         <h3 className="text-xl font-semibold mb-4">Transactions</h3>
         {transactions && transactions.length > 0 ? (
-          <ul className="divide-y divide-gray-200">
-            {transactions.map((transaction, index) => (
-              <li key={index} className="p-2">
-                <div className="flex justify-between">
-                  <p>
-                    {new Date(transaction.date).toLocaleDateString()} -{" "}
-                    {new Date(transaction.date).toLocaleTimeString()}
-                  </p>
-                  <p>Amount: {transaction.amount.toLocaleString()}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Date
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Time
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Amount
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                   Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {transactions.map((transaction, index) => (
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {new Date(transaction.date).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {new Date(transaction.date).toLocaleTimeString()}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {transaction.amount.toLocaleString()}
+                    </td>
+                    <td className="">
+                      <button className="">
+                        <Pen></Pen>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <p>No transactions available.</p>
         )}
       </div>
-      <TnxAddModal isOpen={isOpen} setIsOpen={setIsOpen} id={params.id}/>
+      <TnxAddModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        id={params.id}
+        currentAmount={currentAmount}
+        targetAmount={targetAmount}
+      />
     </div>
   );
 };

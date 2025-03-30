@@ -108,7 +108,7 @@ const Savings = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="mt-4 flex flex-wrap gap-4">
+                      <div className="mt-4 flex flex-wrap gap-4 h-[100px]">
                         <p className="text-sm text-gray-700 mb-1">
                           <span className="font-bold">Target:</span>{" "}
                           {item.targetAmount.toLocaleString()}
@@ -140,7 +140,7 @@ const Savings = () => {
           </div>
         </div>
        
-          <UserSavingsForm isOpen={isOpen} setIsOpen={setIsOpen} />
+          <UserSavingsForm isOpen={isOpen} setIsOpen={setIsOpen}  />
         
       </div>
     </div>

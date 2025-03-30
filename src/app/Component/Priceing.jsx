@@ -42,7 +42,9 @@ const pricingPlans = [
 
 const PricingSection = () => {
   return (
-    <section className="w-full py-16  text-white">
+    <section className="w-full py-16 relative text-white">
+       
+      
       <Container>
         <div className="max-w-5xl mx-auto text-center">
           <span className=" text-gray-300 px-3 py-1 rounded-md text-sm uppercase">

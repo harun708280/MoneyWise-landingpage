@@ -1,26 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useForm, Controller } from "react-hook-form";
 import { toast } from "sonner";
 import { useUpdateSavingMutation } from "@/redux/Api/savingApi";
+import { X } from "lucide-react"; // Import Lucide's X icon
 
-const TnxAddModal = ({ isOpen, setIsOpen, id }) => {
+const TnxAddModal = ({ isOpen, setIsOpen, id, targetAmount }) => {
   const [updateSaving, { isLoading: isUpdating }] = useUpdateSavingMutation();
   const {
     handleSubmit,
     control,
     formState: { errors },
     reset,
+    watch,
   } = useForm();
 
-  console.log(id);
+  const [amountError, setAmountError] = useState(false);
+  const amountValue = watch("amount", "");
 
   const onSubmit = async (data) => {
+    if (parseFloat(data.amount) > targetAmount) {
+      setAmountError(true);
+      return;
+    }
+    setAmountError(false);
+
     try {
-      if (!id) {
-        toast.error("Saving goal ID is missing.");
-        return;
-      }
       await updateSaving({ id, ...data });
       toast.success("Transaction added successfully!");
       reset();
@@ -33,11 +38,7 @@ const TnxAddModal = ({ isOpen, setIsOpen, id }) => {
 
   return (
     <Transition appear show={isOpen} as={React.Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-30 text-gray-700"
-        onClose={() => setIsOpen(false)}
-      >
+      <Dialog as="div" className="relative z-30 text-gray-700" onClose={() => setIsOpen(false)}>
         <Transition.Child
           as={React.Fragment}
           enter="ease-out duration-300"
@@ -62,45 +63,60 @@ const TnxAddModal = ({ isOpen, setIsOpen, id }) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
-                >
+                <div className="absolute top-4 right-4">
+                  {/* Close Button (X icon) */}
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-gray-600 hover:text-gray-900"
+                  >
+                    <X size={24} />
+                  </button>
+                </div>
+                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                   Add Transaction
                 </Dialog.Title>
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
+                  {/* Amount Field */}
                   <div className="mb-4">
-                    <label
-                      htmlFor="amount"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="amount" className="block text-gray-700 text-sm font-bold mb-2">
                       Amount
                     </label>
                     <Controller
                       name="amount"
                       control={control}
-                      rules={{ required: "Amount is required", pattern: /^[0-9]+$/ }}
+                      rules={{
+                        required: "Amount is required",
+                        pattern: {
+                          value: /^[0-9]+$/,
+                          message: "Invalid amount",
+                        },
+                      }}
                       render={({ field }) => (
                         <input
                           {...field}
                           type="number"
+                          className={`w-full p-2 border rounded-md focus:outline-none transition ${
+                            amountError ? "border-red-500" : "border-gray-300"
+                          }`}
                           value={field.value ?? ""}
-                          className="w-full p-2 border rounded-md"
+                          onChange={(e) => {
+                            field.onChange(e);
+                            setAmountError(parseFloat(e.target.value) > targetAmount);
+                          }}
                         />
                       )}
                     />
-                    {errors.amount && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {errors.amount.message}
+                    {/* Blinking Error Message */}
+                    {amountError && (
+                      <p className="text-red-500 text-xs mt-1 animate-fade">
+                        ⚠ Amount exceeds target limit!
                       </p>
                     )}
                   </div>
 
+                  {/* Date Field */}
                   <div className="mb-4">
-                    <label
-                      htmlFor="date"
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                    >
+                    <label htmlFor="date" className="block text-gray-700 text-sm font-bold mb-2">
                       Date
                     </label>
                     <Controller
@@ -116,21 +132,11 @@ const TnxAddModal = ({ isOpen, setIsOpen, id }) => {
                         />
                       )}
                     />
-                    {errors.date && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {errors.date.message}
-                      </p>
-                    )}
+                    {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>}
                   </div>
 
+                  {/* Buttons */}
                   <div className="mt-4 flex justify-end">
-                    <button
-                      type="button"
-                      className="bg-gray-200 px-4 py-2 rounded-md text-gray-900 hover:bg-gray-300"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Cancel
-                    </button>
                     <button
                       type="submit"
                       disabled={isUpdating}
