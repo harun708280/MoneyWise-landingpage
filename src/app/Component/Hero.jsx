@@ -7,9 +7,9 @@ import React from "react";
 const Hero = () => {
   return (
    
-     <div className="flex flex-col items-center mt-8 max-w-3xl w-11/12 md:w-full">
+     <div className="flex flex-col items-center mt-8 max-w-4xl w-11/12 md:w-full">
         <Container>
-      <h1 className="text-4xl md:text-6xl lg:textxl md:!leading-snug font-semibold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
+      <h1 className="text-4xl md:text-6xl lg:text-6xl md:!leading-snug font-bold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
       Simplify Your Finances with Our Intuitive Platform
       </h1>
       <p className="text-base text-gray-300 md:text-lg  mt-6 text-center">
