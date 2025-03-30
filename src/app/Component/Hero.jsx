@@ -10,11 +10,10 @@ const Hero = () => {
      <div className="flex flex-col items-center mt-8 max-w-3xl w-11/12 md:w-full">
         <Container>
       <h1 className="text-4xl md:text-6xl lg:textxl md:!leading-snug font-semibold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
-      Work Smarter, Not Harder – Your Tasks, Simplified
+      Simplify Your Finances with Our Intuitive Platform
       </h1>
       <p className="text-base text-gray-300 md:text-lg  mt-6 text-center">
-        Zero code, maximum speed. Make professional sites easy, fast and fun
-        while delivering best-in-class SEO, performance.
+      Effortlessly manage your money, track spending, and achieve your financial goals..
       </p>
       <div className="hidden md:flex relative items-center justify-center mt-8 md:mt-12 w-full">
         <Link
