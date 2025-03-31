@@ -4,7 +4,10 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="flex flex-col relative items-center justify-center border-t border-border pt-16 pb-8 px-6 lg:px-8 w-full max-w-6xl mx-auto lg:pt-32">
+       <div className="bg-cover bg-center" style={{ backgroundImage: "url('/footer.jpg')" }}>
+         <footer className="flex flex-col relative items-center justify-center  pt-16 pb-8 px-6 lg:px-8 w-full max-w-7xl  mx-auto lg:pt-32 "
+                 // Added inline style for background image
+        >
 
             <div className="hidden lg:block absolute -top-1/3 -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
             <div className="hidden lg:block absolute -top-[80%] -left-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
@@ -128,7 +131,6 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div className="mt-8 border-t border-border/40 pt-4 md:pt-8 md:flex md:items-center md:justify-between w-full">
@@ -138,6 +140,7 @@ const Footer = () => {
             </div>
 
         </footer>
+       </div>
     );
 };
 
