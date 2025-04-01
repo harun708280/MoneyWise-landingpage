@@ -69,7 +69,7 @@ function ModelRightToLeft({ scrollPosition, mousePosition }) {
 
 // Second model: Left to Right (Different model)
 function ModelLeftToRight({ scrollPosition, mousePosition }) {
-    const { scene, animations } = useGLTF('/hero.png'); // Second 3D object
+    const { scene, animations } = useGLTF('/bitcoin.glb'); // Second 3D object
     const mixer = useRef();
     const modelRef = useRef();
     const offset = 4.5; // Set a higher offset for Y-axis positioning

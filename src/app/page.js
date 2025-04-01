@@ -49,7 +49,7 @@ export default function Home() {
       <Hero></Hero>
       <DashBoard/>
       {/* <GlassDNA/> */}
-      <MoneyCountingAnimation/>
+      {/* <MoneyCountingAnimation/> */}
       <Process/>
       <Feature/>
       <CardPayment/>
