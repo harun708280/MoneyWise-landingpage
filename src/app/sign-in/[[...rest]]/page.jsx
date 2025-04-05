@@ -1,7 +1,9 @@
-import { SignIn } from "@clerk/nextjs";
+import Loader from "@/components/global/Loader";
+import { ClerkLoading, SignIn } from "@clerk/nextjs";
 import Link from "next/link";
 
 export default function SignInPage() {
+  <ClerkLoading><Loader/></ClerkLoading>
   return (
     <div
       className="flex justify-center items-center h-screen w-screen bg-cover bg-center"

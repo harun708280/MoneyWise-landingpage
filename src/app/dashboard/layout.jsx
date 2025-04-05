@@ -36,7 +36,7 @@ export default function DashboardLayout({ children }) {
                   </div>
 
                   <div className="px-5 py-2 flex bg-white rounded-4xl gap-3 items-center">
-                    {/* <ModeToggle className=" " /> */}
+                     <ModeToggle className=" " /> 
                     <Bell className="text-gray-800 border h-10 w-10 rounded-full p-2" />
                     <UserButton className="border h-10 w-10 rounded-full p-2" />
                   </div>

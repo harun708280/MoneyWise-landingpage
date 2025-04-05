@@ -133,24 +133,7 @@ export default function AddTransaction() {
       
 
       {/* Tab System */}
-      <div className="flex mb-4">
-        <button
-          onClick={() => setActiveTab("expense")}
-          className={`flex-1 p-2 rounded-l-md ${
-            activeTab === "expense" ? "bg-gradient-to-r  from-blue-900 to-blue-500 text-white" : "bg-gray-100 text-gray-700"
-          }`}
-        >
-          Expense
-        </button>
-        <button
-          onClick={() => setActiveTab("income")}
-          className={`flex-1 p-2 rounded-r-md ${
-            activeTab === "income" ? "bg-gradient-to-r  from-blue-900 to-blue-500 text-white" : "bg-gray-100 text-gray-700"
-          }`}
-        >
-          AddMoney
-        </button>
-      </div>
+      
 
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
        
