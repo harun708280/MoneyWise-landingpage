@@ -22,8 +22,19 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import useUserByEmail from "@/hooks/user";
+import { useUser } from "@clerk/nextjs";
+import Image from "next/image";
+import { AnimatedModalDemo } from "../transactions/component/AnimatedModalDemo";
+import { useIncomeByEmailAndTotalQuery } from "@/redux/Api/transaction";
 
 const AccountAndWallet = () => {
+  const { user, isSignedIn } = useUser();
+  const email = user?.emailAddresses?.[0]?.emailAddress || null;
+  const { user: userData, isLoading, isError, error } = useUserByEmail(email);
+  const {data:incomeData}=useIncomeByEmailAndTotalQuery(email)
+  console.log(incomeData);
+  
   const profileData = {
     name: "John Doe",
     email: "john.doe@example.com",
@@ -130,42 +141,67 @@ const AccountAndWallet = () => {
           >
             {/* Wallet Tab */}
             <TabsContent value="wallet" className="space-y-4">
-              <Card className="bg-white backdrop-blur-lg border border-white/10">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
-                    <Wallet className="w-6 h-6" />
-                    Your Wallet
-                  </CardTitle>
-                  <CardDescription className="text-gray-400">
-                    Manage your wallet balance and account information.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                    <div>
-                      <Label className="text-gray-700">Balance</Label>
-                      <div className="text-3xl font-bold text-green-500 flex items-center">
-                        ${walletData.balance}
-                        <span className="ml-2 text-lg text-gray-600">
-                          {walletData.currency}
-                        </span>
+              <Card className="bg-gradient-to-br from-green-300 to-green-500 text-black rounded-3xl">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                     
+                        <Image
+                          src={userData?.photo}
+                          alt="User Profile"
+                          width={40}
+                          height={40}
+                          className="rounded-full"
+                        />
+                      
+                      <div>
+                        <p className="font-semibold text-white">{userData?.firstName} {userData?.lastName}</p>
+                        <p className="text-sm text-white">{userData?.email}</p>
                       </div>
                     </div>
+                    <div className="text-green-800 font-semibold">{walletData.growth}</div>
+                  </div>
+                  <div className="mt-4">
+                    <p className="text-sm text-white">Total Balance</p>
+                    <p className="text-3xl font-bold text-white">${incomeData?.walletTotal}</p>
+                  </div>
+                  <div className="mt-6 flex  gap-8">
+                    {/* <Button className="bg-white text-black rounded-full px-6 py-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-4 h-4 mr-2"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h4.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Withdraw
+                    </Button> */}
+                    {/* <Button className="bg-white text-black rounded-full px-6 py-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-4 h-4 mr-2"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 101.06 1.06l1.72-1.72H15.75a.75.75 0 000-1.5h-4.69l1.72-1.72a.75.75 0 10-1.06-1.06l-3 3z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Deposit
+                    </Button> */}
+                    <AnimatedModalDemo />
                   </div>
                 </CardContent>
               </Card>
-              <div className="flex gap-4">
-                <Button className="bg-green-500/20 text-green-400 hover:bg-green-500/30 hover:text-green-300 border border-green-500/30 flex items-center">
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  Deposit
-                </Button>
-
-                <Button className="bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 hover:text-purple-300 border border-purple-500/30">
-                  <CreditCard className="mr-2 h-4 w-4" />
-                  Payment
-                </Button>
-              </div>
             </TabsContent>
+
 
             {/* Security Tab */}
             <TabsContent value="security" className="space-y-4">

@@ -9,9 +9,12 @@ import { useGetUserByEmailQuery } from "@/redux/Api/userApi";
 import Loading from "../loading";
 import { useAddTransactionMutation } from "@/redux/Api/transaction";
 import { toast } from "sonner";
+import { usePathname } from 'next/navigation';
 
 export default function AddTransaction() {
-  const [activeTab, setActiveTab] = useState("expense");
+  const pathname = usePathname();
+  const isAccountsPage = pathname === '/dashboard/accounts';
+  const [activeTab, setActiveTab] = useState(isAccountsPage ? "income" : "expense");
   const { user, isSignedIn } = useUser();
   
   
@@ -106,7 +109,7 @@ export default function AddTransaction() {
     
   
     try {
-     
+      
       setSubmitting(true);
   
       const response = await addTransaction(transactionData).unwrap();
@@ -136,49 +139,49 @@ export default function AddTransaction() {
       
 
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-       
-          <Form>
-            <div className="mb-4">
-              <label className="block font-semibold">Amount</label>
-              <Field type="number" name="amount" className="w-full p-2 border rounded-md" />
-              <ErrorMessage name="amount" component="div" className="text-red-500 text-sm" />
-            </div>
+        
+        <Form>
+          <div className="mb-4">
+            <label className="block font-semibold">Amount</label>
+            <Field type="number" name="amount" className="w-full p-2 border rounded-md" />
+            <ErrorMessage name="amount" component="div" className="text-red-500 text-sm" />
+          </div>
 
-            <div className="mb-4">
-              <label className="block font-semibold">Category</label>
-              <Field as="select" name="category" className="w-full p-2 border rounded-md">
-                <option value="">Select Category</option>
-                {categories[activeTab].map((cat) => (
-                  <option key={cat.name} value={cat.name} style={{ backgroundColor: cat.color }}>
-                    {cat.name}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="category" component="div" className="text-red-500 text-sm" />
-            </div>
+          <div className="mb-4">
+            <label className="block font-semibold">Category</label>
+            <Field as="select" name="category" className="w-full p-2 border rounded-md">
+              <option value="">Select Category</option>
+              {categories[activeTab].map((cat) => (
+                <option key={cat.name} value={cat.name} >
+                  {cat.name}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage name="category" component="div" className="text-red-500 text-sm" />
+          </div>
 
-            <div className="mb-4">
-              <label className="block font-semibold">Note</label>
-              <Field type="text" name="note" className="w-full p-2 border rounded-md" />
-              <ErrorMessage name="note" component="div" className="text-red-500 text-sm" />
-            </div>
+          <div className="mb-4">
+            <label className="block font-semibold">Note</label>
+            <Field type="text" name="note" className="w-full p-2 border rounded-md" />
+            <ErrorMessage name="note" component="div" className="text-red-500 text-sm" />
+          </div>
 
-            <div className="mb-4">
-              <label className="block font-semibold">Date</label>
-              <Field type="date" name="date" className="w-full p-2 border rounded-md" />
-              <ErrorMessage name="date" component="div" className="text-red-500 text-sm" />
-            </div>
+          <div className="mb-4">
+            <label className="block font-semibold">Date</label>
+            <Field type="date" name="date" className="w-full p-2 border rounded-md" />
+            <ErrorMessage name="date" component="div" className="text-red-500 text-sm" />
+          </div>
 
-            <button
-              type="submit"
-              
-              className="w-full flex items-center justify-center bg-gradient-to-r  from-blue-900 to-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-            >
-              <PlusCircle className="mr-2" />
-             {addTransactionLoad?'Loading....':'Add'}
-            </button>
-          </Form>
-       
+          <button
+            type="submit"
+            
+            className="w-full flex items-center justify-center bg-gradient-to-r  from-blue-900 to-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+          >
+            <PlusCircle className="mr-2" />
+            {addTransactionLoad?'Loading....':'Add'}
+          </button>
+        </Form>
+      
       </Formik>
     </div>
   );
