@@ -60,23 +60,17 @@ export function AppSidebar(props) {
                 href="/dashboard/savings"
                 className="group flex items-center space-x-2 rounded-md p-2 text-sm font-medium hover:bg-gray-100"
               >
-                <PiggyBank className="h-6 w-6 text-blue-800 "/>
-                <span>Savings</span>
+                <Target className="h-6 w-6 text-blue-800 " />
+                <span>Budgets & Goals</span>
               </Link>
               <Link
-                href="/dashboard"
+                href="/dashboard/accounts"
                 className="group flex items-center space-x-2 rounded-md p-2 text-sm font-medium hover:bg-gray-100"
               >
                 <Wallet className="h-6 w-6 text-blue-800 " />
                 <span>Accounts & Wallets</span>
               </Link>
-              <Link
-                href="/dashboard"
-                className="group flex items-center space-x-2 rounded-md p-2 text-sm font-medium hover:bg-gray-100"
-              >
-                <Target className="h-6 w-6 text-blue-800 " />
-                <span>Budgets & Goals</span>
-              </Link>
+             
               <Link
                 href="/dashboard"
                 className="group flex items-center space-x-2 rounded-md p-2 text-sm font-medium hover:bg-gray-100"

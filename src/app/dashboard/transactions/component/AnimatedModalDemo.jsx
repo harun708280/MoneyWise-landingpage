@@ -12,7 +12,7 @@ export function AnimatedModalDemo() {
   return (
     <div className=" ">
       <Modal style={{ backgroundColor: 'white' }}>
-        <ModalTrigger className={`${isAccountsPage ? 'bg-white text-black rounded-full px-6 py-3' : 'bg-gradient-to-r from-blue-900 to-blue-500 text-white'} cursor-pointer dark:text-black flex justify-center group/modal-btn`}>
+        <ModalTrigger className={`${isAccountsPage ? 'bg-white/20 text-white hover:bg-white/30' : 'bg-gradient-to-r from-blue-900 to-blue-500 text-white'} cursor-pointer dark:text-black flex justify-center group/modal-btn`}>
           <span className={`${isAccountsPage ? '' : 'group-hover/modal-btn:translate-x-40'} text-center transition duration-500 rounded-md flex`}>
             <PlusCircle className="mr-2" /> {isAccountsPage ? 'Deposit' : 'Add condition'}
           </span>

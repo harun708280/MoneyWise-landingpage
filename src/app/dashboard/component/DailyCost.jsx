@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
 import {
   Card,
@@ -11,11 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import {
@@ -27,55 +23,51 @@ import {
 } from "@/components/ui/select";
 
 const chartData = [
-    { date: "2024-04-01", desktop: 222, mobile: 150 },
-    { date: "2024-04-02", desktop: 97, mobile: 180 },
-    { date: "2024-04-03", desktop: 167, mobile: 120 },
-    { date: "2024-04-04", desktop: 242, mobile: 260 },
-    { date: "2024-04-05", desktop: 373, mobile: 290 },
-    { date: "2024-04-06", desktop: 301, mobile: 340 },
-    { date: "2024-04-07", desktop: 245, mobile: 180 },
-    { date: "2024-04-08", desktop: 409, mobile: 320 },
-    { date: "2024-04-09", desktop: 59, mobile: 110 },
-    { date: "2024-04-10", desktop: 261, mobile: 190 },
-    { date: "2024-04-11", desktop: 327, mobile: 350 },
-    { date: "2024-04-12", desktop: 292, mobile: 210 },
-    { date: "2024-04-13", desktop: 342, mobile: 380 },
-    { date: "2024-04-14", desktop: 137, mobile: 220 },
-    { date: "2024-04-15", desktop: 120, mobile: 170 },
-    { date: "2024-04-16", desktop: 138, mobile: 190 },
-    { date: "2024-04-17", desktop: 446, mobile: 360 },
-    { date: "2024-04-18", desktop: 364, mobile: 410 },
-    { date: "2024-04-19", desktop: 243, mobile: 180 },
-    { date: "2024-04-20", desktop: 89, mobile: 150 },
-    { date: "2024-04-21", desktop: 137, mobile: 200 },
-    { date: "2024-04-22", desktop: 224, mobile: 170 },
-    { date: "2024-04-23", desktop: 138, mobile: 230 },
-    { date: "2024-04-24", desktop: 387, mobile: 290 },
-    { date: "2024-04-25", desktop: 215, mobile: 250 },
-    { date: "2024-06-21", desktop: 169, mobile: 210 },
-    { date: "2024-06-22", desktop: 317, mobile: 270 },
-    { date: "2024-06-23", desktop: 480, mobile: 530 },
-    { date: "2024-06-24", desktop: 132, mobile: 180 },
-    { date: "2024-06-25", desktop: 141, mobile: 190 },
-    { date: "2024-06-26", desktop: 434, mobile: 380 },
-    { date: "2024-06-27", desktop: 448, mobile: 490 },
-    { date: "2024-06-28", desktop: 149, mobile: 200 },
-    { date: "2024-06-29", desktop: 103, mobile: 160 },
-    { date: "2024-06-30", desktop: 446, mobile: 400 },
-  ]
-  
+  { date: "2024-04-01", label1: 13000, label2: 5500 },
+  { date: "2024-04-02", label1: 11500, label2: 7000 },
+  { date: "2024-04-03", label1: 12000, label2: 6000 },
+  { date: "2024-04-04", label1: 14000, label2: 8000 },
+  { date: "2024-04-05", label1: 15000, label2: 10000 },
+  { date: "2024-04-06", label1: 18000, label2: 11000 },
+  { date: "2024-04-07", label1: 16000, label2: 9000 },
+  { date: "2024-04-08", label1: 20000, label2: 12000 },
+  { date: "2024-04-09", label1: 10000, label2: 6500 },
+  { date: "2024-04-10", label1: 13000, label2: 7500 },
+  { date: "2024-04-11", label1: 15000, label2: 9500 },
+  { date: "2024-04-12", label1: 14000, label2: 8500 },
+  { date: "2024-04-13", label1: 17000, label2: 11500 },
+  { date: "2024-04-14", label1: 12000, label2: 7000 },
+  { date: "2024-04-15", label1: 11000, label2: 6500 },
+  { date: "2024-04-16", label1: 12500, label2: 7500 },
+  { date: "2024-04-17", label1: 19000, label2: 12500 },
+  { date: "2024-04-18", label1: 18500, label2: 13000 },
+  { date: "2024-04-19", label1: 16500, label2: 9500 },
+  { date: "2024-04-20", label1: 10500, label2: 6000 },
+  { date: "2024-04-21", label1: 12500, label2: 7500 },
+  { date: "2024-04-22", label1: 13500, label2: 8000 },
+  { date: "2024-04-23", label1: 14500, label2: 8500 },
+  { date: "2024-04-24", label1: 17500, label2: 10000 },
+  { date: "2024-04-25", label1: 16000, label2: 9000 },
+  { date: "2024-06-21", label1: 13000, label2: 8000 },
+  { date: "2024-06-22", label1: 16000, label2: 10500 },
+  { date: "2024-06-23", label1: 20000, label2: 13000 },
+  { date: "2024-06-24", label1: 12000, label2: 7500 },
+  { date: "2024-06-25", label1: 12500, label2: 8000 },
+  { date: "2024-06-26", label1: 18000, label2: 12000 },
+  { date: "2024-06-27", label1: 19000, label2: 13500 },
+  { date: "2024-06-28", label1: 13000, label2: 8500 },
+  { date: "2024-06-29", label1: 11000, label2: 7000 },
+  { date: "2024-06-30", label1: 18500, label2: 12500 },
+];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  label1: {
+    label: "Label 1",
+    color: "#7559e8",
   },
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "hsl(var(--chart-2))",
+  label2: {
+    label: "Label 2",
+    color: "#f59e0b",
   },
 };
 
@@ -96,11 +88,17 @@ const DailyCost = () => {
     return date >= startDate;
   });
 
+  const getDayOfWeek = (dateString) => {
+    const date = new Date(dateString);
+    const days = ["Ok", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return days[date.getDay()];
+  };
+
   return (
     <Card>
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1 text-center sm:text-left">
-          <CardTitle>Area Chart - Interactive</CardTitle>
+          <CardTitle>Analytics</CardTitle>
           <CardDescription>
             Showing total visitors for the last 3 months
           </CardDescription>
@@ -110,7 +108,7 @@ const DailyCost = () => {
             className="w-[160px] rounded-lg sm:ml-auto"
             aria-label="Select a value"
           >
-            <SelectValue placeholder="Last 3 months" />
+            <SelectValue placeholder="Weekly" />
           </SelectTrigger>
           <SelectContent className="rounded-xl">
             <SelectItem value="90d" className="rounded-lg">
@@ -139,14 +137,19 @@ const DailyCost = () => {
               tickMargin={8}
               minTickGap={32}
               tickFormatter={(value) => {
-                const date = new Date(value);
-                return date.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                });
+                return getDayOfWeek(value);
               }}
             />
-            <ChartTooltip
+            <YAxis
+              tickFormatter={(value) => {
+                if (value >= 1000) {
+                  return `${value / 1000}k`;
+                }
+                return value;
+              }}
+              domain={[1000, "dataMax"]}
+            />
+            <Tooltip
               cursor={false}
               content={
                 <ChartTooltipContent
@@ -161,22 +164,47 @@ const DailyCost = () => {
               }
             />
             <Area
-              dataKey="mobile"
+              dataKey="label1"
               type="natural"
-              stroke="var(--color-mobile)"
-              stackId="a"
+              stroke={chartConfig.label1.color}
+              fill={chartConfig.label1.color}
+              fillOpacity={0.3}
             />
             <Area
-              dataKey="desktop"
+              dataKey="label2"
               type="natural"
-              stroke="var(--color-desktop)"
-              stackId="a"
+              stroke={chartConfig.label2.color}
+              fill={chartConfig.label2.color}
+              fillOpacity={0.3}
             />
-            <ChartLegend content={<ChartLegendContent />} />
+            <Legend content={<LegendContent />} />
           </AreaChart>
         </ChartContainer>
       </CardContent>
     </Card>
+  );
+};
+
+const LegendContent = (props) => {
+  const { payload } = props;
+  return (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      {payload.map((item, index) => (
+        <div key={`item-${index}`} style={{ display: "flex", alignItems: "center", marginRight: "10px" }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              backgroundColor: item.color,
+              marginRight: "5px",
+            }}
+          ></span>
+          <span style={{ fontSize: "0.8rem" }}>{item.value}</span>
+        </div>
+      ))}
+    </div>
   );
 };
 
