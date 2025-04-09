@@ -13,12 +13,30 @@ const testimonials = [
   { email: "olivia.patterson@business.org", description: "The real-time notifications help me stay on top of my deadlines. Fantastic tool!" },
   { email: "liam.harrison@startup.io", description: "I’ve tried multiple task managers, but this one is by far the most user-friendly and powerful." },
   { email: "emma.carter@agency.com", description: "Collaboration has become effortless with this app. A must-have for teams!" },
+  { email: "alex.johnson@example.com", description: "WorkWave keeps everything organized and efficient. Task management has never been easier!" },
+  { email: "sophia.roberts@email.com", description: "Absolutely love the UI and functionality. It makes tracking tasks a breeze!" },
+  { email: "matthew.sanders@company.com", description: "Our team productivity increased by 40% after switching to WorkWave. Highly recommend!" },
+  { email: "olivia.patterson@business.org", description: "The real-time notifications help me stay on top of my deadlines. Fantastic tool!" },
+  { email: "liam.harrison@startup.io", description: "I’ve tried multiple task managers, but this one is by far the most user-friendly and powerful." },
+  { email: "emma.carter@agency.com", description: "Collaboration has become effortless with this app. A must-have for teams!" },
+  { email: "alex.johnson@example.com", description: "WorkWave keeps everything organized and efficient. Task management has never been easier!" },
+  { email: "sophia.roberts@email.com", description: "Absolutely love the UI and functionality. It makes tracking tasks a breeze!" },
+  { email: "matthew.sanders@company.com", description: "Our team productivity increased by 40% after switching to WorkWave. Highly recommend!" },
+  { email: "olivia.patterson@business.org", description: "The real-time notifications help me stay on top of my deadlines. Fantastic tool!" },
+  { email: "liam.harrison@startup.io", description: "I’ve tried multiple task managers, but this one is by far the most user-friendly and powerful." },
+  { email: "emma.carter@agency.com", description: "Collaboration has become effortless with this app. A must-have for teams!" },
+  { email: "alex.johnson@example.com", description: "WorkWave keeps everything organized and efficient. Task management has never been easier!" },
+  { email: "sophia.roberts@email.com", description: "Absolutely love the UI and functionality. It makes tracking tasks a breeze!" },
+  { email: "matthew.sanders@company.com", description: "Our team productivity increased by 40% after switching to WorkWave. Highly recommend!" },
+  { email: "olivia.patterson@business.org", description: "The real-time notifications help me stay on top of my deadlines. Fantastic tool!" },
+  { email: "liam.harrison@startup.io", description: "I’ve tried multiple task managers, but this one is by far the most user-friendly and powerful." },
+  { email: "emma.carter@agency.com", description: "Collaboration has become effortless with this app. A must-have for teams!" },
 ];
 
 const columns = [
-  { id: 1, duration: 40, ani: "-50%" }, 
-  { id: 2, duration: 50, ani: "50%" },
-  { id: 3, duration: 30, ani: "-50%" }
+  { id: 1, duration: 40, ani: "-40%" }, 
+  { id: 2, duration: 50, ani: "-20%" },
+  { id: 3, duration: 30, ani: "20%" }
 ];
 
 const Testimonial = () => {
@@ -57,7 +75,7 @@ const Testimonial = () => {
               className="flex flex-col gap-6"
             >
               {testimonials.map((testimonial, index) => (
-                <div key={index} className=" shadow-lg rounded-xl p-6 max-w-sm w-full border">
+                <div key={index} className=" backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 hover:shadow-blue-500/20 transition-all duration-300 6 max-w-sm w-full ">
                   <div className="flex items-center gap-4">
                     <div className="bg-gray-200 p-3 rounded-full">
                       <User className="w-6 h-6 text-primary" />

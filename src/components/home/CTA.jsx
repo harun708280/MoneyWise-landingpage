@@ -7,7 +7,7 @@ const CTA = ({ children }) => {
   return (
     <div className=" w-full mb-12 md:mb-[100px] relative flex flex-col items-center h-[500px]">
       {/* Top Grid */}
-      <div className="absolute top-0 clip-path-cta left-0 right-0 rounded-3xl overflow-hidden border-t-2 border-blue-500 h-[20vh]">
+      <div className="absolute top-0 clip-path-cta left-0 right-0 rounded-3xl overflow-hidden border-t-2 border-blue-500/40 h-[20vh]">
         <RetroGrid className="opacity-100" angle={120} cellSize={180} />
       </div>
 
@@ -26,7 +26,7 @@ const CTA = ({ children }) => {
       </div>
 
       {/* Bottom Grid */}
-      <div className="absolute clip-path-cta bottom-0 border-t-2 border-blue-500 border-opacity left-0 right-0 rounded-3xl overflow-hidden h-[20vh] rotate-180">
+      <div className="absolute clip-path-cta bottom-0 border-t-2 border-blue-500/40 border-opacity left-0 right-0 rounded-3xl overflow-hidden h-[20vh] rotate-180">
         <RetroGrid className="opacity-100" angle={-245} cellSize={180} />
       </div>
     </div>
