@@ -16,6 +16,7 @@ import CardPayment from "./Component/CardPayment";
 import MoneyVisualizer from '../components/3d/MoneyVisualizer';
 import GlassDNA from "../components/3d/MoneyVisualizer";
 import MoneyCountingAnimation from "@/components/3d/CountingAnimation";
+import News from "@/components/home/News";
 
 
 export default function Home() {
@@ -57,6 +58,7 @@ export default function Home() {
       <PricingSection/>
       <Testimonial/>
      <Launch/>
+     
     </section>
   );
 }

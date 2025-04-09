@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/global/Loader";
 import {
@@ -12,9 +12,67 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowRight, FileText, Youtube, Music, LayoutList } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  FileText,
+  Youtube,
+  Music,
+  LayoutList,
+  ShoppingCart,
+  Bus,
+  Heart,
+  Film,
+  Book,
+  Receipt,
+  Repeat,
+  TrendingUp,
+  Users,
+  HelpCircle,
+  Briefcase,
+  Laptop,
+  Activity,
+  BarChart,
+  Home,
+  Percent,
+  Gift,
+  Award,
+  Star,
+} from "lucide-react";
 import Image from "next/image";
 import DailyCost from "./component/DailyCost";
+import useUserByEmail from "@/hooks/user";
+import { useIncomeByEmailAndTotalQuery } from "@/redux/Api/transaction";
+import Loading from "./transactions/loading";
+
+const categories = {
+  expense: [
+    { name: "Food", color: "#FF6347", icon: <FileText /> },
+    { name: "Shopping", color: "#FFA500", icon: <ShoppingCart /> },
+    { name: "Transport", color: "#4682B4", icon: <Bus /> },
+    { name: "Health", color: "#32CD32", icon: <Heart /> },
+    { name: "Entertainment", color: "#8A2BE2", icon: <Film /> },
+    { name: "Education", color: "#FFD700", icon: <Book /> },
+    { name: "Bills", color: "#DC143C", icon: <Receipt /> },
+    { name: "Subscriptions", color: "#00CED1", icon: <Repeat /> },
+    { name: "Investment", color: "#556B2F", icon: <TrendingUp /> },
+    { name: "Family", color: "#FF69B4", icon: <Users /> },
+    { name: "Others", color: "#808080", icon: <HelpCircle /> },
+  ],
+  income: [
+    { name: "Salary", color: "#32CD32", icon: <Briefcase /> },
+    { name: "Freelancing", color: "#4682B4", icon: <Laptop /> },
+    { name: "Investments", color: "#FFD700", icon: <Activity /> },
+    { name: "Business", color: "#FFA500", icon: <BarChart /> },
+    { name: "Rental Income", color: "#8A2BE2", icon: <Home /> },
+    { name: "Dividends", color: "#00CED1", icon: <Percent /> },
+    { name: "Gifts", color: "#DC143C", icon: <Gift /> },
+    { name: "Grants", color: "#556B2F", icon: <Award /> },
+    { name: "Bonuses", color: "#FF6347", icon: <Star /> },
+    { name: "Family", color: "#FF69B4", icon: <Users /> },
+    { name: "Others", color: "#808080", icon: <HelpCircle /> },
+  ],
+};
 
 const MainDashboard = () => {
   const { userId, isLoaded } = useAuth();
@@ -22,85 +80,50 @@ const MainDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [overviewData, setOverviewData] = useState(null);
   const [savingPlans, setSavingPlans] = useState([]);
-  const [recentTransactions, setRecentTransactions] = useState([
-    {
-      name: "Figma",
-      amount: 100,
-      date: "August 20, 2022",
-      icon: <FileText className="h-6 w-6" />,
-    },
-    {
-      name: "Youtube",
-      amount: 120,
-      date: "August 20, 2022",
-      icon: <Youtube className="h-6 w-6" />,
-    },
-    {
-      name: "Spotify",
-      amount: 15,
-      date: "August 20, 2022",
-      icon: <Music className="h-6 w-6" />,
-    },
-    {
-      name: "Freepik",
-      amount: 300,
-      date: "August 20, 2022",
-      icon: <LayoutList className="h-6 w-6" />,
-    },
-  ]);
+
+  const { user, isSignedIn } = useUser();
+  const email = user?.emailAddresses?.[0]?.emailAddress || null;
+  const { user: userData, isLoading, isError, error } = useUserByEmail(email);
+  const { data: incomeData, isLoading: dataLoading } =
+    useIncomeByEmailAndTotalQuery(email);
+
   useEffect(() => {
-    if (isLoaded) {
-      if (!userId) {
-        router.push("/sign-in");
-      } else {
-        
-        setTimeout(() => {
-          setOverviewData({
-            balance: 28891.138,
-            balanceChange: 15,
-            saving: 1050.44,
-            savingChange: 10,
-            expenses: 200.31,
-            expensesChange: 2,
-            incomes: 21121.0,
-            incomesChange: 8,
-          });
-
-          setSavingPlans([
-            {
-              name: "Bali Vacation",
-              target: 4000,
-              current: 1950.21,
-              completion: 48,
-              targetDate: "August 25 2022",
-            },
-            {
-              name: "New Gadget",
-              target: 1000,
-              current: 790.21,
-              completion: 79,
-              targetDate: "August 25 2022",
-            },
-            {
-              name: "Charity",
-              target: 100,
-              current: 32.111,
-              completion: 32,
-              targetDate: "August 25 2022",
-            },
-          ]);
-
-          setLoading(false);
-        }, 2000);
-      }
+    if (incomeData && incomeData.savings) {
+      setSavingPlans(incomeData.savings.slice(0, 3));
+    } else {
+      setSavingPlans([]);
     }
-  }, [userId, isLoaded, router]);
+  }, [incomeData]);
 
-  if (loading) {
-    return <Loader />;
+  console.log(savingPlans);
+
+  if (dataLoading && isLoading) {
+    return <Loading />;
   }
 
-  
+  if (incomeData) {
+    const {
+      expenses,
+      incomes,
+      savings,
+      totalExpense,
+      totalIncome,
+      totalSavings,
+      transactions,
+      walletTotal,
+    } = incomeData;
+
+    console.log(
+      expenses,
+      incomes,
+      savings,
+      totalExpense,
+      totalIncome,
+      totalSavings,
+      transactions,
+      walletTotal
+    );
+  }
 
   return (
     <div className="p-4 md:p-8">
@@ -108,7 +131,6 @@ const MainDashboard = () => {
         <div className="max-w-[65%] w-full bg-white p-4 shadow-lg rounded-md">
           <h1 className="text-3xl text-gray-900 font-bold mb-6 ">Overview</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
-            {/* Your Balance Card */}
             <Card className="bg-indigo-600 text-white">
               <CardHeader>
                 <div className="flex gap-6 items-center">
@@ -125,25 +147,24 @@ const MainDashboard = () => {
                       <span className="bg-green-500/50 p-[1px] rounded-sm text-green-500">
                         <ArrowRight className="-rotate-45 text-sm h-4" />
                       </span>
-                      15% compared with last month
+                      5 % compared with last month
                     </CardDescription>
                   </div>
                 </div>
                 <div className="border-b-2 border-white/20 pt-4"></div>
               </CardHeader>
-              
               <CardContent className="flex items-center justify-between">
-                
-                <div className="text-2xl font-bold">$28,891.138</div>
+                <div className="text-2xl font-bold">
+                  ${incomeData?.walletTotal}
+                </div>
                 <Button variant="outline" size="icon" className="rounded-full">
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </CardContent>
             </Card>
 
-            {/* Saving Card */}
             <Card className="">
-            <CardHeader>
+              <CardHeader>
                 <div className="flex gap-6 items-center">
                   <Image
                     src="/save-2.png"
@@ -158,21 +179,22 @@ const MainDashboard = () => {
                       <span className="bg-red-500/50 p-[1px] rounded-sm text-red-500">
                         <ArrowRight className="-rotate-45 text-sm h-4" />
                       </span>
-                      10% compared with last month
+                      3% compared with last month
                     </CardDescription>
                   </div>
                 </div>
                 <div className="border-b-2 border-gray-300 pt-4"></div>
               </CardHeader>
               <CardContent className="flex items-center justify-between">
-                <div className="text-2xl font-bold">$1,050.44</div>
+                <div className="text-2xl font-bold">
+                  ${incomeData?.totalSavings || 0}
+                </div>
                 <Button variant="outline" size="icon" className="rounded-full">
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </CardContent>
             </Card>
 
-            {/* Expenses Card */}
             <Card className="">
               <CardHeader>
                 <div className="flex gap-6 items-center">
@@ -189,23 +211,24 @@ const MainDashboard = () => {
                       <span className="bg-yellow-500/50 p-[1px] rounded-sm text-yellow-500">
                         <ArrowRight className="-rotate-45 text-sm h-4" />
                       </span>
-                      2% compared with last month
+                      7% compared with last month
                     </CardDescription>
                   </div>
                 </div>
                 <div className="border-b-2 border-gray-300 pt-4"></div>
               </CardHeader>
               <CardContent className="flex items-center justify-between">
-                <div className="text-2xl font-bold">$200.31</div>
+                <div className="text-2xl font-bold">
+                  ${incomeData?.totalExpense}
+                </div>
                 <Button variant="outline" size="icon" className="rounded-full">
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </CardContent>
             </Card>
 
-            {/* Incomes Card */}
             <Card className="text-gray-900">
-            <CardHeader>
+              <CardHeader>
                 <div className="flex gap-6 items-center">
                   <Image
                     src="/direct-down.png"
@@ -220,14 +243,16 @@ const MainDashboard = () => {
                       <span className="bg-blue-500/50 p-[1px] rounded-sm text-blue-500">
                         <ArrowRight className="-rotate-45 text-sm h-4" />
                       </span>
-                      8% compared with last month
+                      {overviewData?.incomesChange}% compared with last month
                     </CardDescription>
                   </div>
                 </div>
                 <div className="border-b-2 border-gray-300 pt-4"></div>
               </CardHeader>
               <CardContent className="flex items-center justify-between">
-                <div className="text-2xl font-bold">$21,121.0</div>
+                <div className="text-2xl font-bold">
+                  ${incomeData?.totalIncome}
+                </div>
                 <Button variant="outline" size="icon" className="rounded-full">
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -236,7 +261,6 @@ const MainDashboard = () => {
           </div>
         </div>
 
-        {/* Saving Plan Section */}
         <div className="grid w-[35%] bg-white grid-cols-1  gap-4 p-4 rounded-md shadow-lg">
           <div className="lg:col-span-1">
             <h2 className="text-2xl font-bold text-gray-900 not-last-of-type:font-bold  flex justify-between items-center">
@@ -246,48 +270,67 @@ const MainDashboard = () => {
               </Button>
             </h2>
             <div className="border-b-2 border-gray-300 py-4"></div>
-            {/* Saving Plan Cards */}
-            {savingPlans.map((plan, index) => (
-              <div key={index} className="mb-4 p-4 text-gray-900 ">
-                <div className="">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold">{plan.name}</h3>
-                    <p className="text-sm text-gray-500">
-                      Target: {plan.targetDate}
+            {savingPlans.map((plan, index) => {
+              const targetDate = plan?.endDate
+                ? new Date(plan.endDate).toLocaleDateString()
+                : "N/A";
+
+              return (
+                <div key={index} className="mb-4 p-4 text-gray-900 ">
+                  <div className="">
+                    <div className="flex justify-between items-center mb-2">
+                      <h3 className="font-semibold">{plan?.category}</h3>
+                      <p className="text-sm text-gray-500">
+                        Target: {targetDate}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="text-lg font-bold">
+                      ${plan?.currentAmount}
+                      <span className="text-[12px] text-gray-500">
+                        /${plan?.targetAmount}
+                      </span>
+                    </div>
+                    <p className="text-sm">
+                      {plan?.targetAmount > 0
+                        ? ((plan?.currentAmount / plan?.targetAmount) * 100).toFixed(2)
+                        : 0}
+                      %
                     </p>
                   </div>
-                  
-                </div>
-                <div className="flex justify-between">
-               
-                <div className="text-lg font-bold">
-                    ${plan.current}
-                    <span className="text-[12px] text-gray-500">
-                      /${plan.target}
-                    </span>
+                  <div className="flex justify-between items-center">
+                    <div className="w-full mt-4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                      <div
+                        className={`h-2.5 rounded-full ${
+                          plan?.category === "Emergency Fund"
+                            ? "bg-green-500"
+                            : plan?.category === "Home/Car"
+                            ? "bg-purple-500"
+                            : plan?.category === "Education"
+                            ? "bg-yellow-500"
+                            : "bg-blue-500"
+                        }`}
+                        style={{
+                          width:
+                            plan?.targetAmount > 0
+                              ? `${((plan?.currentAmount / plan?.targetAmount) * 100).toFixed(2)}%`
+                              : "0%",
+                        }}
+                      ></div>
+                    </div>
                   </div>
-                  <p className="text-sm">{plan.completion}%</p>
                 </div>
-                <div className="flex justify-between items-center">
-                  
-                  <div className="w-full mt-4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                    <div
-                      className="bg-blue-600 h-2.5 rounded-full"
-                      style={{ width: `${plan.completion}%` }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
       <div className="flex gap-8 mt-20 ">
         <div className="max-w-[65%] w-full ">
-        <DailyCost/>
+          <DailyCost  incomes={incomeData?.incomes} expenses={incomeData?.expenses} />
         </div>
         <div className="w-[35%] border p-4 shadow-lg rounded-md">
-          {/* Recent Transaction */}
           <h2 className="text-2xl font-bold text-gray-900 flex justify-between items-center">
             Recent Transaction
             <Button variant="link" className="text-sm text-blue-500">
@@ -295,27 +338,39 @@ const MainDashboard = () => {
             </Button>
           </h2>
           <div className="border-b-2 border-gray-300 my-4"></div>
-          {recentTransactions.map((transaction, index) => (
-            <div key={index} className="flex justify-between items-center mb-10">
-            <div className="flex items-center gap-4">
-              <div className="rounded-full bg-gray-200 p-2">
-                {transaction.icon}
+          {incomeData?.transactions?.slice(0, 4).map((transaction, index) => {
+            const categoryType = transaction.type === "expense" ? "expense" : "income";
+            const categoryInfo = categories[categoryType]?.find(
+              (cat) => cat.name === transaction.category
+            );
+
+            return (
+              <div
+                key={index}
+                className="flex justify-between items-center mb-10"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="rounded-full bg-gray-200 p-2">
+                    {categoryInfo?.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-bold  text-gray-900">
+                      {transaction?.category} <span className={`text-sm px-1 rounded-full pb-1 text-white font-medium ${transaction.type==='income'?'bg-amber-400':'bg-red-500 '}`}>{transaction.type}</span>
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                      {new Date(transaction?.date).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">
+                    ${transaction?.amount}
+                  </h3>
+                  <p className="text-sm text-green-500">Complete</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-gray-900">
-                  {transaction.name}
-                </h3>
-                <p className="text-sm text-gray-500">{transaction.date}</p>
-              </div>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900">
-                ${transaction.amount}
-              </h3>
-              <p className="text-sm text-green-500">Completed</p>
-            </div>
-          </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

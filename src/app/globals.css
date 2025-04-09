@@ -43,6 +43,15 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-grid: grid 15s linear infinite;
+  @keyframes grid {
+  0% {
+    transform: translateY(-50%);
+    }
+  100% {
+    transform: translateY(0);
+    }
+  }
 }
 
 :root {
@@ -145,7 +154,6 @@
   --chart-2: #03a9f4; /* Safari */
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -205,8 +213,6 @@
 .my-element.active {
   color: red !important;
 }
-
-
 
 @keyframes fadeInOut {
   0%, 100% {

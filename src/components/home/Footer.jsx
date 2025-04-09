@@ -4,7 +4,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-       <div className="bg-cover bg-center" style={{ backgroundImage: "url('/footer.jpg')" }}>
+       <div className="bg-cover bg-center" >
          <footer className="flex flex-col relative items-center justify-center  pt-16 pb-8 px-6 lg:px-8 w-full max-w-7xl  mx-auto lg:pt-32 "
                  // Added inline style for background image
         >

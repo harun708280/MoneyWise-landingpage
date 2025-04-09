@@ -36,11 +36,16 @@ export const transactionApi = baseApi.injectEndpoints({
     }),
     incomeByEmailAndTotal: builder.query({
       query: (email) => `/transactions/income/total/${email}`,
-      providesTags: ["userTransactions"],
+      providesTags: ["userTransactions","Saving"],
     }),
+
+    chartDataAnalyst:builder.query({
+      query: (email) => `/transactions/chart-data/${email}`,
+      providesTags: ["userTransactions"],
+    })
   }),
 
   
 });
 
-export const { useAddTransactionMutation,useAllTransactionByEmailQuery,useDeleteTransactionMutation,useSingleTransactionQuery,useUpdateTransactionMutation,useIncomeByEmailAndTotalQuery} = transactionApi;
+export const { useAddTransactionMutation,useAllTransactionByEmailQuery,useDeleteTransactionMutation,useSingleTransactionQuery,useUpdateTransactionMutation,useIncomeByEmailAndTotalQuery,useChartDataAnalystQuery} = transactionApi;
