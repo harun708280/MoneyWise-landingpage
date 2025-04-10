@@ -25,14 +25,14 @@ export const savingApi = baseApi.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Saving"], // Properly invalidating the tag
+      invalidatesTags: ["Saving"], 
     }),
     deleteSaving: builder.mutation({
       query: (id) => ({
         url: `/savings/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Saving"], // Properly invalidating the tag
+      invalidatesTags: ["Saving"], 
     }),
   }),
 });

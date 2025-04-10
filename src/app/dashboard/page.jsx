@@ -114,14 +114,7 @@ const MainDashboard = () => {
     } = incomeData;
 
     console.log(
-      expenses,
-      incomes,
-      savings,
-      totalExpense,
-      totalIncome,
-      totalSavings,
-      transactions,
-      walletTotal
+      incomeData
     );
   }
 
