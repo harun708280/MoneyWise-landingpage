@@ -72,7 +72,7 @@ export function AppSidebar(props) {
               </Link>
              
               <Link
-                href="/dashboard"
+                href="/dashboard/analysis"
                 className="group flex items-center space-x-2 rounded-md p-2 text-sm font-medium hover:bg-gray-100"
               >
                 <BarChart4 className="h-6 w-6 text-blue-800 " />

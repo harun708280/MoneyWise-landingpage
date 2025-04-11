@@ -13,11 +13,11 @@ import Launch from "./Component/Launch";
 import { LampDemo } from "@/components/ui/lamp";
 import Security from "./Component/Security";
 import CardPayment from "./Component/CardPayment";
-import MoneyVisualizer from '../components/3d/MoneyVisualizer';
+import MoneyVisualizer from "../components/3d/MoneyVisualizer";
 import GlassDNA from "../components/3d/MoneyVisualizer";
 import MoneyCountingAnimation from "@/components/3d/CountingAnimation";
 import News from "@/components/home/News";
-
+import Company from "./Component/Company";
 
 export default function Home() {
   return (
@@ -31,7 +31,7 @@ export default function Home() {
   transition-all duration-500 ease-in-out transform hover:scale-105 hover:shadow-yellow-500/50"
         >
           <Image src={"/sparkles-dark.svg"} height={16} width={16} alt="icon" />
-          <span className="text-white font-medium">WorkWave Start Now</span>
+          <span className="text-white font-medium uppercase">Explore the V-2.0</span>
           <ChevronRight className="w-4 h-4 text-white" />
 
           <BorderBeam
@@ -46,19 +46,19 @@ export default function Home() {
           />
         </button>
       </div>
-     
+
       <Hero></Hero>
-      <DashBoard/>
+      <DashBoard />
+      <Company />
       {/* <GlassDNA/> */}
       {/* <MoneyCountingAnimation/> */}
-      <Process/>
-      <Feature/>
-      <CardPayment/>
-      <Security/>
-      <PricingSection/>
-      <Testimonial/>
-     <Launch/>
-     
+      <Process />
+      <Feature />
+      <CardPayment />
+      <Security />
+      <PricingSection />
+      <Testimonial />
+      <Launch />
     </section>
   );
 }

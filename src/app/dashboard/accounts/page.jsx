@@ -36,15 +36,14 @@ const AccountAndWallet = () => {
   const { user, isSignedIn } = useUser();
   const email = user?.emailAddresses?.[0]?.emailAddress || null;
   const { user: userData, isLoading, isError, error } = useUserByEmail(email);
-  const { data: incomeData,isLoading:dataLoading } = useIncomeByEmailAndTotalQuery(email);
-
+  const { data: incomeData, isLoading: dataLoading } =
+    useIncomeByEmailAndTotalQuery(email);
 
   if (dataLoading && isLoading) {
-    return <Loading/>
+    return <Loading />;
   }
 
   console.log(incomeData);
-  
 
   const profileData = {
     name: "John Doe",
@@ -87,45 +86,14 @@ const AccountAndWallet = () => {
     visible: { opacity: 1 },
   };
 
-  const walletCards = [
-    {
-      title: "Total Balance",
-      value: incomeData?.walletTotal || 0,
-      icon: <Wallet className="w-6 h-6 text-green-400" />,
-      color: "bg-gradient-to-br from-green-300 to-green-500",
-      buttonText: "Deposit",
-    },
-    {
-      title: "Total Income",
-      value: incomeData?.totalIncome || 0,
-      icon: <TrendingUp className="w-6 h-6 text-blue-400" />,
-      color: "bg-gradient-to-br from-blue-300 to-blue-500",
-      buttonText: "Add Income",
-    },
-    {
-      title: "Total Expense",
-      value: incomeData?.totalExpense || 0,
-      icon: <TrendingDown className="w-6 h-6 text-red-400" />,
-      color: "bg-gradient-to-br from-red-300 to-red-500",
-      buttonText: "Add Expense",
-    },
-    {
-      title: "Savings",
-      value: incomeData?.totalSavings || 0,
-      icon: <PiggyBank className="w-6 h-6 text-yellow-400" />,
-      color: "bg-gradient-to-br from-yellow-300 to-yellow-500",
-      buttonText: "Add Savings",
-    },
-  ];
-
   return (
-    <div className="min-h-screen text-gray-900 p-4 md:p-8">
+    <div className="min-h-screen p-4 text-gray-900 md:p-8">
       <div className="container mx-auto max-w-4xl space-y-8">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
+          className="text-center text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 sm:text-4xl md:text-5xl"
         >
           Account & Wallet
         </motion.h1>
@@ -136,14 +104,12 @@ const AccountAndWallet = () => {
             initial="hidden"
             animate="visible"
           >
-            <TabsList className="grid w-full grid-cols-3 bg-blue-600/60 backdrop-blur-lg border border-white/10 h-[70px] gap-12 rounded-lg overflow-hidden">
+            <TabsList className="grid h-[70px] w-full grid-cols-3 gap-12 overflow-hidden rounded-lg border border-white/10 bg-blue-600/60 backdrop-blur-lg">
               <TabsTrigger
                 value="wallet"
                 className={cn(
-                  "text-white py-3 sm:py-4 text-sm sm:text-base font-medium",
-                  "hover:bg-white/10 hover:text-white transition-colors duration-200",
-                  "data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400",
-                  "flex items-center justify-center gap-2"
+                  "flex items-center justify-center gap-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-white/10 hover:text-white py-3 sm:py-4",
+                  "data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400"
                 )}
               >
                 <Wallet className="h-4 w-4" /> Wallet
@@ -152,10 +118,8 @@ const AccountAndWallet = () => {
               <TabsTrigger
                 value="security"
                 className={cn(
-                  "text-white py-3 sm:py-4 text-sm sm:text-base font-medium",
-                  "hover:bg-white/10 hover:text-white transition-colors duration-200",
-                  "data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400",
-                  "flex items-center justify-center gap-2"
+                  "flex items-center justify-center gap-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-white/10 hover:text-white py-3 sm:py-4",
+                  "data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400"
                 )}
               >
                 <KeyRound className="h-4 w-4" /> Security
@@ -164,10 +128,8 @@ const AccountAndWallet = () => {
               <TabsTrigger
                 value="settings"
                 className={cn(
-                  "text-white py-3 sm:py-4 text-sm sm:text-base font-medium",
-                  "hover:bg-white/10 hover:text-white transition-colors duration-200",
-                  "data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400",
-                  "flex items-center justify-center gap-2"
+                  "flex items-center justify-center gap-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-white/10 hover:text-white py-3 sm:py-4",
+                  "data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400"
                 )}
               >
                 <Settings className="h-4 w-4" /> Settings
@@ -183,59 +145,135 @@ const AccountAndWallet = () => {
           >
             {/* Wallet Tab */}
             <TabsContent value="wallet" className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {walletCards.map((card, index) => (
-                  <Card
-                    key={index}
-                    className={`${card.color} text-black rounded-3xl`}
-                  >
-                    <CardContent className="p-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          {card.icon}
-                          <div>
-                            <p className="font-semibold text-white">
-                              {userData?.firstName} {userData?.lastName}
-                            </p>
-                            <p className="text-sm text-white">{userData?.email}</p>
-                            <p className="text-sm text-white">
-                              ID: {userData?._id}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="text-green-800 font-semibold">
-                          {walletData.growth}
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                {/* Total Balance Card */}
+                <Card className="rounded-3xl bg-gradient-to-br from-red-300 to-red-500  text-black">
+                  <CardContent className="p-4">
+                    <div className="mt-4">
+                      <div className="flex gap-6 items-center">
+                        <Image
+                          src="/empty-wallet.png"
+                          height={40}
+                          width={40}
+                          alt="wallet"
+                          className="p-2 border rounded-full border-white/10"
+                        />
+                        <div className="">
+                          <CardTitle className="text-xl font-bold text-white">
+                            Total Balance
+                          </CardTitle>
                         </div>
                       </div>
-                      <div className="mt-4">
-                        <p className="text-lg font-bold text-white">
-                          {card.title}
-                        </p>
-                        <p className="text-3xl font-bold text-white">
-                          ${card.value}
-                        </p>
+                      <div className="border-b-2 border-white/20 my-2"></div>
+                      <p className="text-3xl font-bold text-white">
+                        ${incomeData?.walletTotal || 0}
+                      </p>
+                    </div>
+                    <div className="mt-6 flex gap-8">
+                      <AnimatedModalDemo />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Total Income Card */}
+                <Card className="rounded-3xl bg-gradient-to-br from-blue-300 to-blue-500 text-black">
+                  <CardContent className="p-4">
+                    <div className="mt-4">
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src="/direct-down.png"
+                          height={40}
+                          width={40}
+                          alt="wallet"
+                          className="border rounded-full border-gray-300 p-2"
+                        />
+                        <div>
+                          <CardTitle className="text-xl text-white font-bold">Total Incomes</CardTitle>
+                          <CardDescription className="flex items-center gap-2 mt-1 text-gray-600" />
+                        </div>
                       </div>
-                      <div className="mt-6 flex gap-8">
-                        {
-                          index===0 ?<AnimatedModalDemo />:<Button className="bg-white/20 text-white hover:bg-white/30">
-                          {card.buttonText}
-                        </Button>
-                        }
-                        
-                        
+                      <div className="border-b-2 border-gray-300 my-2" />
+                      <p className="text-3xl font-bold text-white">
+                        ${incomeData?.totalIncome || 0}
+                      </p>
+                    </div>
+                    <div className="mt-6 flex gap-8">
+                      <Button className="border border-white/30 bg-white/20 text-white hover:bg-white/30">
+                      <PlusCircle/>  Add Income
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Total Expense Card */}
+                <Card className="rounded-3xl bg-gradient-to-br from-yellow-200 to-yellow-400  text-black">
+                  <CardContent className="p-4">
+                    <div className="mt-4">
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src="/direct-up.png"
+                          height={40}
+                          width={40}
+                          alt="wallet"
+                          className="border rounded-full border-gray-300 p-2"
+                        />
+                        <div>
+                          <CardTitle className="text-xl text-white font-bold">Total Expenses</CardTitle>
+                        </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                      <div className="border-b-2 border-gray-300 my-2" />
+                      <p className="text-3xl font-bold text-white">
+                        ${incomeData?.totalExpense || 0}
+                      </p>
+                    </div>
+                    <div className="mt-6 flex gap-8">
+                      <Button className="border border-white/30 bg-white/20 text-white hover:bg-white/30">
+                      <PlusCircle/>   Add Expense
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Savings Card */}
+                <Card className="rounded-3xl bg-gradient-to-br from-green-300 to-green-500   text-black">
+                  <CardContent className="p-4">
+                    <div className="mt-4">
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src="/save-2.png"
+                          height={40}
+                          width={40}
+                          alt="wallet"
+                          className="border rounded-full border-gray-300 p-2"
+                        />
+                        <div>
+                          <CardTitle className="text-xl text-white font-bold">
+                            Total Saving
+                          </CardTitle>
+                        </div>
+                      </div>
+                      <div className="border-b-2 border-gray-300 my-2" />
+                      <p className="text-3xl font-bold text-white">
+                        ${incomeData?.totalSavings || 0}
+                      </p>
+                    </div>
+                    <div className="mt-6 flex gap-8">
+                      <Button className="border border-white/30 bg-white/20 text-white hover:bg-white/30">
+                      <PlusCircle/>  Add Savings
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
 
             {/* Security Tab */}
+            {/* Settings Tab */}
             <TabsContent value="security" className="space-y-4">
-              <Card className="bg-blue-400  backdrop-blur-lg border border-white/10">
+              <Card className="border border-white/10 bg-blue-400 backdrop-blur-lg">
                 <CardHeader>
-                  <CardTitle className="text-2xl font-semibold text-white flex items-center gap-2">
-                    <KeyRound className="w-6 h-6" /> Security
+                  <CardTitle className="flex items-center gap-2 text-2xl font-semibold text-white">
+                    <KeyRound className="h-6 w-6" /> Security
                   </CardTitle>
                   <CardDescription className="text-gray-400">
                     Manage your account security settings.
@@ -243,7 +281,7 @@ const AccountAndWallet = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label className="text-white flex items-center gap-2">
+                    <Label className="flex items-center gap-2 text-white">
                       Two-Factor Authentication
                       {securityData.twoFactorAuth ? (
                         <span className="text-green-400">(Enabled)</span>
@@ -262,22 +300,21 @@ const AccountAndWallet = () => {
                     <Input
                       value={securityData.lastLogin}
                       readOnly
-                      className="bg-black/20 text-white border-gray-700"
+                      className="border-gray-700 bg-black/20 text-white"
                     />
                   </div>
-                  <Button className="bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 hover:text-purple-300 border border-purple-500/30 w-full">
+                  <Button className="w-full border border-purple-500/30 bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 hover:text-purple-300">
                     <Lock className="mr-2 h-4 w-4" /> Change Password
                   </Button>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            {/* Settings Tab */}
             <TabsContent value="settings" className="space-y-4">
-              <Card className="bg-white/5 backdrop-blur-lg border border-white/10">
+              <Card className="border border-white/10 bg-white/5 backdrop-blur-lg">
                 <CardHeader>
-                  <CardTitle className="text-2xl font-semibold text-white flex items-center gap-2">
-                    <Settings className="w-6 h-6" /> Settings
+                  <CardTitle className="flex items-center gap-2 text-2xl font-semibold text-white">
+                    <Settings className="h-6 w-6" /> Settings
                   </CardTitle>
                   <CardDescription className="text-gray-400">
                     Customize your application preferences.
@@ -289,14 +326,14 @@ const AccountAndWallet = () => {
                     <Input
                       value={settingsData.language}
                       readOnly
-                      className="bg-black/20 text-white border-gray-700"
+                      className="border-gray-700 bg-black/20 text-white"
                     />
                   </div>
                   <div className="flex items-center justify-between">
                     <Label className="text-white">Notifications</Label>
                     <span
                       className={cn(
-                        "px-3 py-1 rounded-full text-sm",
+                        "rounded-full px-3 py-1 text-sm",
                         settingsData.notifications
                           ? "bg-green-500/20 text-green-400"
                           : "bg-red-500/20 text-red-400"
@@ -309,7 +346,7 @@ const AccountAndWallet = () => {
                     <Label className="text-white">Dark Mode</Label>
                     <span
                       className={cn(
-                        "px-3 py-1 rounded-full text-sm",
+                        "rounded-full px-3 py-1 text-sm",
                         settingsData.darkMode
                           ? "bg-blue-500/20 text-blue-400"
                           : "bg-gray-700 text-gray-400"
@@ -318,7 +355,7 @@ const AccountAndWallet = () => {
                       {settingsData.darkMode ? "Enabled" : "Disabled"}
                     </span>
                   </div>
-                  <Button className="bg-gray-700 text-white hover:bg-gray-600 border border-gray-700 w-full">
+                  <Button className="w-full border border-gray-700 bg-gray-700 text-white hover:bg-gray-600">
                     <LogOut className="mr-2 h-4 w-4" /> Log Out
                   </Button>
                 </CardContent>
