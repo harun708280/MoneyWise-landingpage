@@ -1,29 +1,48 @@
+"use client";
 import Container from "@/components/global/container";
 import SectionBadge from "@/components/ui/section-badge";
-import React from "react";
+import React, { useRef } from "react";
 import { CalendarCheck, ListChecks, TrendingUp } from "lucide-react";
+
+import { useScroll } from "motion/react";
+
+import Card from "./Cadr";
 
 const steps = [
   {
-    icon: CalendarCheck,
-    title: "Plan Your Tasks",
-    info: "Create and organize your tasks with clear priorities and deadlines.",
+    icon: '1.svg',
+    number: '01',
+    title: 'Plan Your Tasks',
+    info: 'Create and organize your tasks with clear priorities and deadlines.',
   },
   {
-    icon: ListChecks,
-    title: "Track Progress",
-    info: "Monitor real-time task updates and collaborate with your team efficiently.",
+    icon: '2.svg',
+    number: '02',
+    title: 'Track Progress',
+    info: 'Monitor real-time task updates and collaborate with your team efficiently.',
   },
   {
-    icon: TrendingUp,
-    title: "Achieve Goals",
-    info: "Complete tasks, mark progress, and reach your project milestones smoothly.",
+    icon: '3.svg',
+    number: '03',
+    title: 'Achieve Goals',
+    info: 'Complete tasks, mark progress, and reach your project milestones smoothly.',
   },
 ];
 
+
 const Process = () => {
+  const container = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+
   return (
-    <div className="flex flex-col items-center justify-center py-12 relative">
+    <div
+      className="flex flex-col items-center w-full max-w-7xl justify-center py-12 relative"
+      ref={container}
+    >
       <Container>
         <div className="max-w-xl mx-auto text-start md:text-center">
           <SectionBadge title="The Process" />
@@ -33,31 +52,27 @@ const Process = () => {
           <p className="text-muted-foreground mt-6">
             Organize, collaborate, and track your tasks with ease.
           </p>
-        </div>
-      </Container>
-        
-        
 
-      <Container>
-        <div className="flex max-w-7xl mx-auto flex-col items-center justify-center py-10 md:py-20 w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full divide-x-0 md:divide-x divide-y md:divide-y-0 divide-gray-900 first:border-l-2 lg:first:border-none first:border-gray-900">
-            {steps.map((perk) => (
-              <div
-                key={perk.title}
-                className="flex flex-col items-start px-4 md:px-6 lg:px-8 lg:py-6 py-4"
-              >
-                <div className="flex items-center justify-center">
-                  <perk.icon className="w-8 h-8" />
-                </div>
-                <h3 className="text-lg font-medium mt-4">{perk.title}</h3>
-                <p className="text-muted-foreground mt-2 text-start lg:text-start">
-                  {perk.info}
-                </p>
-              </div>
-            ))}
-          </div>
+          
         </div>
       </Container>
+
+      <div className="  w-full relative  mx-auto flex-col  py-10 md:py-20 ">
+        {steps.map((perk, i) => {
+          const targetScale = 1 - i * 0.05;
+
+          return (
+            <Card
+              key={i}
+              i={i}
+              {...perk}
+              progress={scrollYProgress}
+              range={[i * 0.1, (i + 1) * 0.1]}
+              targetScale={targetScale}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
