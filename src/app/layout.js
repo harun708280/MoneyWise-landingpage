@@ -9,6 +9,7 @@ import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
 import Loader from "@/components/global/Loader";
 
+import { redirect } from "next/navigation";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,6 +21,8 @@ const geistMono = Geist_Mono({
 });
 
 export default function Layout({ children }) {
+ 
+
   const pathname = usePathname(); // Get current path
 
   // Condition to check if path includes "dashboard"

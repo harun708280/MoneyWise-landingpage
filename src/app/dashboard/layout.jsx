@@ -1,3 +1,4 @@
+'use client'
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./component/app-sidebar";
 import { ThemeProvider } from "./component/theme-provider";
@@ -11,10 +12,21 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { ModeToggle } from "./component/ModeToggle";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import { Bell, Search } from "lucide-react";
+import SyncUser from "@/hooks/SyncUser";
+
+import { redirect } from "next/navigation";
 
 export default function DashboardLayout({ children }) {
+  const { user, isSignedIn } = useUser()
+
+  
+
+  if (!isSignedIn) {
+    redirect("/sign-in"); 
+  }
+
   return (
     <div className=" h-screen bg-gray-50 " suppressHydrationWarning>
       <ThemeProvider
