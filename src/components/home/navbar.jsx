@@ -1,21 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "../global/container";
 import Link from "next/link";
 import Image from "next/image";
 import { buttonVariants } from "../ui/button";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import CommonButton from "../ui/CommonButton";
 
 const Navbar = () => {
   const { isSignedIn } = useUser();
   const router = useRouter();
+ 
+
+  useEffect(() => {
+    // Add smooth scrolling
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1); // Remove '#'
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  }, []);
   return (
     <div>
-      <header className="px-4 h-14 sticky top-0 inset-x-0 w-full  backdrop-blur-lg border-b border-gray-500 z-50">
+      <header className="px-4 py-4 h-16 mb-20  fixed top-0 inset-x-0 w-full  backdrop-blur-lg border-b border-gray-500 z-50">
         <Container reverse>
           <div className="flex items-center justify-between h-full mx-auto md:max-w-screen-xl">
             <div className="flex items-start">
-              <Link href="/" className="flex items-center gap-2">
+              <a href="#home" className="flex items-center gap-2">
                 <div className="w-8 h-8">
                   <Image
                     src={"/icon.png"}
@@ -25,39 +47,73 @@ const Navbar = () => {
                   ></Image>
                 </div>
                 <span className="text-lg font-medium">Money Wise</span>
-              </Link>
+              </a>
             </div>
             <nav className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <ul className="flex items-center justify-center gap-8">
-                <Link href="#" className="hover:text-foreground/80 text-sm">
-                  Pricing
-                </Link>
-                <Link href="#" className="hover:text-foreground/80 text-sm">
-                  About
-                </Link>
-                <Link href="#" className="hover:text-foreground/80 text-sm">
-                  Features
-                </Link>
-                <Link href="#" className="hover:text-foreground/80 text-sm">
-                  Blog
-                </Link>
+                <li>
+                  <a
+                    href="#home" // Added ID
+                    
+                    className="hover:text-foreground/80 text-sm font-semibold"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#features"  // Added ID
+                    
+                    className="hover:text-foreground/80 text-sm font-semibold"
+                  >
+                    Features
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#pricing"  // Added ID
+                    
+                    className="hover:text-foreground/80 text-sm font-semibold"
+                  >
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#security"  // Added ID
+                   
+                    className="hover:text-foreground/80 text-sm font-semibold"
+                  >
+                    Security
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#support"  // Added ID
+                    
+                    className="hover:text-foreground/80 text-sm font-semibold"
+                  >
+                    Support
+                  </a>
+                </li>
               </ul>
             </nav>
             <div className="flex items-center gap-4">
-              {/* <Link
-                href="/sign-in"
-                className={buttonVariants({ size: "sm", variant: "ghost" })}
-              >
-                Login
-              </Link> */}
+            
               {
                 isSignedIn ?<Link
                 href="/dashboard"
-                className="bg-gradient-to-r  from-blue-900 to-blue-500 px-3 py-1 rounded-lg font-semibold"
+                
+                
               >
-                Start free trial
+                <CommonButton isReversed>
+
+                <span className="font-bold">Start Free Trial</span>
+
+                </CommonButton>
+                
               </Link>:<Link href="/sign-in" className="bg-gradient-to-r  from-blue-900 to-blue-500 px-4 py-1 rounded-md">
-                  Sign In
+                Sign In
                 </Link>
               }
             </div>
@@ -66,6 +122,6 @@ const Navbar = () => {
       </header>
     </div>
   );
-};
+}
 
-export default Navbar;
+export default Navbar

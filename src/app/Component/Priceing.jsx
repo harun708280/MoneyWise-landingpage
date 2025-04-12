@@ -4,38 +4,44 @@ import { Bolt } from "lucide-react";
 
 const pricingPlans = [
   {
-    name: "Starter",
+    name: "Basic",
     price: "Free",
-    description: "Perfect for trying out WorkWave",
-    features: ["Limited projects", "1 Team member", "Basic features"],
-    buttonText: "Start for free",
+    description:
+      "Ideal for individuals getting started with budgeting and tracking.",
+    features: [
+      "Track income & expenses",
+      "Manual data entry",
+      "Monthly summary report",
+    ],
+    buttonText: "Get Started",
     buttonStyle: "bg-white text-black hover:bg-gray-200",
   },
   {
-    name: "Unlimited SaaS",
-    price: "$199",
-    description: "The ultimate agency kit",
+    name: "Pro",
+    price: "$12/mo",
+    description:
+      "Best for professionals who want automation and smart insights.",
     features: [
-      "Unlimited projects",
-      "5 Team members",
-      "Advanced design tools",
-      "Customizable domain",
+      "All Basic features",
+      "Recurring transactions",
+      "Advanced analytics",
+      "Bank integration",
     ],
     buttonText: "Upgrade to Pro",
     buttonStyle: "bg-blue-600 text-white hover:bg-blue-700",
     highlighted: true,
   },
   {
-    name: "Enterprise",
-    price: "$399",
-    description: "For serious agency owners",
+    name: "Team",
+    price: "$29/mo",
+    description: "Perfect for small teams managing shared financial goals.",
     features: [
-      "Unlimited projects",
-      "Unlimited Team members",
-      "Custom branding",
-      "Priority support (24/7)",
+      "All Pro features",
+      "Multi-user collaboration",
+      "Role-based access",
+      "Priority email support",
     ],
-    buttonText: "Upgrade to Enterprise",
+    buttonText: "Start Team Plan",
     buttonStyle: "bg-white text-black hover:bg-gray-200",
   },
 ];
@@ -43,19 +49,17 @@ const pricingPlans = [
 const PricingSection = () => {
   return (
     <section className="w-full py-16 relative text-white">
-       
-      
       <Container>
         <div className="max-w-5xl mx-auto text-center">
           <span className=" text-gray-300 px-3 py-1 rounded-md text-sm uppercase">
             <SectionBadge title="Pricing" />
           </span>
-          <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
-            Choose the Best Plan for Your Team
+          <h2 className="text-3xl lg:text-4xl font-bold mt-6">
+          Choose the Right Plan for Your Finances
           </h2>
           <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
-            Pick a plan that fits your needs and collaborate effortlessly with
-            your team.
+            Whether you're budgeting solo or managing team finances, find a plan
+            that fits your needs and grows with you.
           </p>
         </div>
       </Container>

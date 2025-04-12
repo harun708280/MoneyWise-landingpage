@@ -10,26 +10,24 @@ import Card from "./Cadr";
 
 const steps = [
   {
-    icon: '1.svg',
-    number: '01',
-    title: 'Plan Your Tasks',
-    info: 'Create and organize your tasks with clear priorities and deadlines.',
+    icon: "2.svg",
+    number: "01",
+    title: "Sign Up & Set Preferences",
+    info: "Start by creating your personal account. Customize your dashboard by setting financial goals, preferred currency, and categories that match your lifestyle to make tracking easier and more personalized.",
   },
   {
-    icon: '2.svg',
-    number: '02',
-    title: 'Track Progress',
-    info: 'Monitor real-time task updates and collaborate with your team efficiently.',
+    icon: "1.svg",
+    number: "02",
+    title: "Add Income & Expenses",
+    info: "Log all your sources of income and daily expenses with detailed descriptions, dates, and categories. This helps you maintain an accurate financial record and stay aware of your spending habits.",
   },
   {
-    icon: '3.svg',
-    number: '03',
-    title: 'Achieve Goals',
-    info: 'Complete tasks, mark progress, and reach your project milestones smoothly.',
+    icon: "3.svg",
+    number: "03",
+    title: "Track & Analyze",
+    info: "Visualize your financial journey through interactive charts, balance overviews, and expense breakdowns. Identify spending trends, get smart insights, and make informed decisions to reach your financial goals faster.",
   },
 ];
-
-
 const Process = () => {
   const container = useRef(null);
 
@@ -40,20 +38,23 @@ const Process = () => {
 
   return (
     <div
-      className="flex flex-col items-center w-full max-w-7xl justify-center py-12 relative"
+      className="flex flex-col items-center w-full max-w-7xl justify-center pt-28 relative"
       ref={container}
     >
+      <div className="hidden lg:block absolute bottom-0 -left-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
+      <div className="hidden lg:block absolute top-[20%] -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
       <Container>
         <div className="max-w-xl mx-auto text-start md:text-center">
           <SectionBadge title="The Process" />
-          <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
-            Three Simple Steps to Manage Your Tasks Efficiently
-          </h2>
-          <p className="text-muted-foreground mt-6">
-            Organize, collaborate, and track your tasks with ease.
-          </p>
+          <h2 className="text-3xl leading-[50px] lg:text-4xl font-bold mt-6">
+          Smarter Steps to Save More
 
-          
+
+          </h2>
+          <p className="text-muted-foreground mt-3">
+            Effortlessly manage your income and expenses, set clear financial
+            goals, and stay on top of your spending — all in one place.
+          </p>
         </div>
       </Container>
 

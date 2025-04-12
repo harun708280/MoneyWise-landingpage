@@ -13,7 +13,7 @@ import CommonButton from "@/components/ui/CommonButton";
 
 const Launch = () => {
   return (
-    <div className="pt-24  w-full max-w-[1050px]  ">
+    <div className="pt-24  w-full max-w-[1050px] mx-auto ">
       <CTA>
         <div className="flex flex-col items-center justify-center relative w-full text-center">
           {/* Animated Heading */}
