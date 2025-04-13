@@ -13,12 +13,12 @@ import CommonButton from "@/components/ui/CommonButton";
 
 const Launch = () => {
   return (
-    <div className="pt-24  w-full max-w-[1050px] mx-auto ">
+    <div className="md:pt-24 w-full max-w-[1050px] mx-auto px-4 overflow-hidden"> {/* Added px-4 for padding on smaller screens */}
       <CTA>
         <div className="flex flex-col items-center justify-center relative w-full text-center">
           {/* Animated Heading */}
           <motion.h2
-            className="text-4xl lg:text-5xl xl:text-6xl lg:!leading-snug font-semibold mt-8"
+            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl lg:!leading-snug font-semibold mt-8" // Adjusted font size for smaller screens
             initial={{ backgroundPosition: "100% 50%" }}
             animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
             transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
@@ -28,8 +28,7 @@ const Launch = () => {
 
           {/* Subtitle */}
           <p className="text-muted-foreground mt-6 max-w-md mx-auto">
-            Build stunning websites with Astra&apos;s intuitive drag-and-drop
-            builder and powerful AI assistant
+            Build stunning websites with Astra&apos;s intuitive drag-and-drop builder and powerful AI assistant
           </p>
 
           {/* CTA Button */}
@@ -41,19 +40,16 @@ const Launch = () => {
             
           </Button>
           <Link href="/sign-in" className="mt-5">
-          <CommonButton isReversed>
+            <CommonButton isReversed>
               <div className="flex items-center gap-2">
                 
-             
-              Get started for free
-              <ArrowRight className="w-4 h-4 ml-2" />
-            
+                Get started for free
+                <ArrowRight className="w-4 h-4 ml-2" />
+                
               </div>
             </CommonButton>
-            </Link>
+          </Link>
         </div>
-
-      
       </CTA>
     </div>
   );

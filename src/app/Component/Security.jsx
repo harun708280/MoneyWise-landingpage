@@ -12,9 +12,9 @@ const Security = () => {
                 <section className=" py-16 max-w-7xl mx-auto">
             <div className="container mx-auto px-4">
                 <Container>
-                <div className="text-center mb-12 max-w-2xl mx-auto">
+                <div className="text-start md:text-center mb-12 max-w-2xl mx-auto">
                      <SectionBadge title="Security" />
-                    <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
+                    <h2 className="text-xl md:text-3xl lg:text-4xl font-semibold mt-6">
                         Your Financial Security is Our Top Priority
                     </h2>
                     <p className="text-muted-foreground mt-6">
@@ -29,7 +29,7 @@ const Security = () => {
                     <div className=" backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 hover:shadow-blue-500/20 transition-all duration-300">
                         <div className="flex items-center gap-4 mb-4">
                             <ShieldCheck className="w-8 h-8 text-blue-400" />
-                            <h3 className="text-xl font-semibold text-white">End-to-End Encryption</h3>
+                            <h3 className="md:text-xl font-semibold text-white">End-to-End Encryption</h3>
                         </div>
                         <p className="text-gray-300">
                             Your data is encrypted from your device to our servers, so no third party can see it.
@@ -40,7 +40,7 @@ const Security = () => {
                     <div className=" backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 hover:shadow-purple-500/20 transition-all duration-300">
                         <div className="flex items-center gap-4 mb-4">
                             <Fingerprint className="w-8 h-8 text-purple-400" />
-                            <h3 className="text-xl font-semibold text-white">Biometric Authentication</h3>
+                            <h3 className=" md:text-xl font-semibold text-white">Biometric Authentication</h3>
                         </div>
                         <p className="text-gray-300">
                             Use biometric authentication like Face ID or Fingerprint for added security.
@@ -51,7 +51,7 @@ const Security = () => {
                     <div className=" backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 hover:shadow-green-500/20 transition-all duration-300">
                         <div className="flex items-center gap-4 mb-4">
                             <Lock className="w-8 h-8 text-green-400" />
-                            <h3 className="text-xl font-semibold text-white">Multi-Factor Authentication</h3>
+                            <h3 className="md:text-xl font-semibold text-white">Multi-Factor Authentication</h3>
                         </div>
                         <p className="text-gray-300">
                             Set up multiple verification steps, such as a password and OTP, to log in to your account.
@@ -62,7 +62,7 @@ const Security = () => {
                     <div className=" backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 hover:shadow-yellow-500/20 transition-all duration-300">
                         <div className="flex items-center gap-4 mb-4">
                             <KeyRound className="w-8 h-8 text-yellow-400" />
-                            <h3 className="text-xl font-semibold text-white">Regular Security Audits</h3>
+                            <h3 className="md:text-xl font-semibold text-white">Regular Security Audits</h3>
                         </div>
                         <p className="text-gray-300">
                             We regularly test our security systems and quickly resolve any vulnerabilities.
@@ -73,7 +73,7 @@ const Security = () => {
                     <div className=" backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 hover:shadow-pink-500/20 transition-all duration-300">
                         <div className="flex items-center gap-4 mb-4">
                             <CheckCircle className="w-8 h-8 text-pink-400" />
-                            <h3 className="text-xl font-semibold text-white">Data Privacy</h3>
+                            <h3 className="md:text-xl font-semibold text-white">Data Privacy</h3>
                         </div>
                         <p className="text-gray-300">
                             We keep your personal information strictly confidential and do not share it with any third party.
@@ -84,7 +84,7 @@ const Security = () => {
                     <div className=" backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 hover:shadow-cyan-500/20 transition-all duration-300">
                         <div className="flex items-center gap-4 mb-4">
                             <Lock className="w-8 h-8 text-cyan-400" />
-                            <h3 className="text-xl font-semibold text-white">24/7 Monitoring</h3>
+                            <h3 className="md:text-xl font-semibold text-white">24/7 Monitoring</h3>
                         </div>
                         <p className="text-gray-300">
                             Our systems are monitored 24/7 to keep your data secure.

@@ -17,6 +17,7 @@ import IncomeChart from "./Component/IncomeChart";
 import Loading from "../transactions/loading";
 import ExpanseChart from "./Component/ExpanseChart";
 import SavingChart from "./Component/SavingChart";
+import Link from "next/link";
 
 const Analysis = () => {
   const { user, isSignedIn } = useUser();
@@ -34,7 +35,7 @@ const Analysis = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
         {/* Left Side: Cards and Expense Chart */}
         <div className="space-y-8 flex flex-col justify-between">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
             <Card className="bg-indigo-600 text-white">
               <CardHeader>
                 <div className="flex gap-6 items-center">
@@ -55,9 +56,12 @@ const Analysis = () => {
                 <div className="text-2xl font-bold">
                   ${incomeData?.walletTotal}
                 </div>
+                <Link href='/dashboard/accounts'>
                 <Button variant="outline" size="icon" className="rounded-full">
                   <ArrowRight className="h-4 w-4" />
                 </Button>
+
+                </Link>
               </CardContent>
             </Card>
             <Card>
@@ -80,9 +84,12 @@ const Analysis = () => {
                 <div className="text-2xl font-bold">
                   ${incomeData?.totalSavings || 0}
                 </div>
+                <Link href='/dashboard/accounts'>
                 <Button variant="outline" size="icon" className="rounded-full">
                   <ArrowRight className="h-4 w-4" />
                 </Button>
+
+                </Link>
               </CardContent>
             </Card>
             <Card className='mt-7'>
@@ -105,9 +112,12 @@ const Analysis = () => {
                 <div className="text-2xl font-bold">
                   ${incomeData?.totalExpense}
                 </div>
+                <Link href='/dashboard/transactions'>
                 <Button variant="outline" size="icon" className="rounded-full">
                   <ArrowRight className="h-4 w-4" />
                 </Button>
+
+                </Link>
               </CardContent>
             </Card>
             <Card className="text-gray-900 mt-7">
@@ -132,9 +142,12 @@ const Analysis = () => {
                 <div className="text-2xl font-bold">
                   ${incomeData?.totalIncome}
                 </div>
+                <Link href='/dashboard/savings'>
                 <Button variant="outline" size="icon" className="rounded-full">
                   <ArrowRight className="h-4 w-4" />
                 </Button>
+
+                </Link>
               </CardContent>
             </Card>
           </div>

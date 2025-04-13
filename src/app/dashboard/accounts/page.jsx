@@ -89,15 +89,7 @@ const AccountAndWallet = () => {
   return (
     <div className="min-h-screen p-4 text-gray-900 md:p-8">
       <div className="container mx-auto max-w-4xl space-y-8">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 sm:text-4xl md:text-5xl"
-        >
-          Account & Wallet
-        </motion.h1>
-
+       
         <Tabs defaultValue="wallet" className="w-full space-y-4">
           <motion.div
             variants={contentVariants}

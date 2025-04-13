@@ -10,22 +10,21 @@ import CommonButton from "../ui/CommonButton";
 const Navbar = () => {
   const { isSignedIn } = useUser();
   const router = useRouter();
- 
 
   useEffect(() => {
-    // Add smooth scrolling
-    const navLinks = document.querySelectorAll('nav a');
     
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+    const navLinks = document.querySelectorAll("nav a");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
         e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1); // Remove '#'
+        const targetId = link.getAttribute("href").substring(1); // Remove '#'
         const targetElement = document.getElementById(targetId);
-        
+
         if (targetElement) {
           window.scrollTo({
             top: targetElement.offsetTop,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }
       });
@@ -33,7 +32,7 @@ const Navbar = () => {
   }, []);
   return (
     <div>
-      <header className="px-4 py-4 h-16 mb-20  fixed top-0 inset-x-0 w-full  backdrop-blur-lg border-b border-gray-500 z-50">
+      <header className="px-4 py-4 h-16 mb-20 overflow-hidden  fixed top-0 inset-x-0 w-full  backdrop-blur-lg border-b border-gray-500 z-50">
         <Container reverse>
           <div className="flex items-center justify-between h-full mx-auto md:max-w-screen-xl">
             <div className="flex items-start">
@@ -54,7 +53,6 @@ const Navbar = () => {
                 <li>
                   <a
                     href="#home" // Added ID
-                    
                     className="hover:text-foreground/80 text-sm font-semibold"
                   >
                     Home
@@ -62,8 +60,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a
-                    href="#features"  // Added ID
-                    
+                    href="#features" // Added ID
                     className="hover:text-foreground/80 text-sm font-semibold"
                   >
                     Features
@@ -71,8 +68,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a
-                    href="#pricing"  // Added ID
-                    
+                    href="#pricing" // Added ID
                     className="hover:text-foreground/80 text-sm font-semibold"
                   >
                     Pricing
@@ -80,8 +76,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a
-                    href="#security"  // Added ID
-                   
+                    href="#security" // Added ID
                     className="hover:text-foreground/80 text-sm font-semibold"
                   >
                     Security
@@ -89,8 +84,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a
-                    href="#support"  // Added ID
-                    
+                    href="#support" // Added ID
                     className="hover:text-foreground/80 text-sm font-semibold"
                   >
                     Support
@@ -99,29 +93,25 @@ const Navbar = () => {
               </ul>
             </nav>
             <div className="flex items-center gap-4">
-            
-              {
-                isSignedIn ?<Link
-                href="/dashboard"
-                
-                
-              >
-                <CommonButton isReversed>
-
-                <span className="font-bold">Start Free Trial</span>
-
-                </CommonButton>
-                
-              </Link>:<Link href="/sign-in" className="bg-gradient-to-r  from-blue-900 to-blue-500 px-4 py-1 rounded-md">
-                Sign In
+              {isSignedIn ? (
+                <Link href="/dashboard">
+                  <CommonButton isReversed>
+                    <span className="font-bold">Start Free Trial</span>
+                  </CommonButton>
                 </Link>
-              }
+              ) : (
+                <Link href="/sign-in" className="cursor-pointer">
+                  <CommonButton isReversed>
+                    <span className="font-bold"> Sign In</span>
+                  </CommonButton>
+                </Link>
+              )}
             </div>
           </div>
         </Container>
       </header>
     </div>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

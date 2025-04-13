@@ -9,6 +9,7 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 import {
@@ -19,13 +20,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useUser } from "@clerk/nextjs";
 import { useChartDataAnalystQuery } from "@/redux/Api/transaction";
 
@@ -45,7 +39,6 @@ const DailyCost = () => {
     },
   };
 
-  // তারিখের ফিল্টারিং সরিয়ে দেওয়া হলো
   const filteredData = data;
 
   const getDayOfWeek = (dateString) => {
@@ -68,52 +61,58 @@ const DailyCost = () => {
     <Card>
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1 text-center sm:text-left">
-          <CardTitle className='text-2xl font-bold text-gray-900'>Analytics</CardTitle>
+          <CardTitle className="text-2xl font-bold text-gray-900">Analytics</CardTitle>
           <CardDescription>Showing all transactions</CardDescription>
         </div>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        <ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
-          <AreaChart data={filteredData}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="date"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              minTickGap={32}
-              tickFormatter={(value) => {
-                return getDayOfWeek(value);
-              }}
-            />
-            <YAxis
-              tickFormatter={(value) => {
-                if (value >= 1000) {
-                  return `${value}`;
-                }
-                return value;
-              }}
-              domain={[0, maxDataValue]}
-            />
-            <Tooltip
-              cursor={false}
-              content={
-                <ChartTooltipContent
-                  labelFormatter={(value) => {
-                    return new Date(value.split("-").reverse().join("-")).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                    });
+        {filteredData && filteredData.length > 0 ? (
+          <ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={filteredData}>
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                  minTickGap={32}
+                  tickFormatter={(value) => {
+                    return getDayOfWeek(value);
                   }}
-                  indicator="dot"
                 />
-              }
-            />
-            <Area dataKey="income" type="natural" stroke={chartConfig.income.color} fill={chartConfig.income.color} fillOpacity={0.3} />
-            <Area dataKey="expense" type="natural" stroke={chartConfig.expense.color} fill={chartConfig.expense.color} fillOpacity={0.3} />
-            <Legend content={<LegendContent />} />
-          </AreaChart>
-        </ChartContainer>
+                <YAxis
+                  tickFormatter={(value) => {
+                    if (value >= 1000) {
+                      return `${value}`;
+                    }
+                    return value;
+                  }}
+                  domain={[0, maxDataValue]}
+                />
+                <Tooltip
+                  cursor={false}
+                  content={
+                    <ChartTooltipContent
+                      labelFormatter={(value) => {
+                        return new Date(value.split("-").reverse().join("-")).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                        });
+                      }}
+                      indicator="dot"
+                    />
+                  }
+                />
+                <Area dataKey="income" type="natural" stroke={chartConfig.income.color} fill={chartConfig.income.color} fillOpacity={0.3} />
+                <Area dataKey="expense" type="natural" stroke={chartConfig.expense.color} fill={chartConfig.expense.color} fillOpacity={0.3} />
+                <Legend content={<LegendContent />} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        ) : (
+          <p className="text-gray-500 text-center">No data available for analytics.</p>
+        )}
       </CardContent>
     </Card>
   );

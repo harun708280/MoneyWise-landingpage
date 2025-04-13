@@ -48,6 +48,25 @@ const chartConfig = {
 const ExpanseChart = ({ ExpenseChartData }) => {
   console.log(ExpenseChartData);
 
+ 
+  if (!ExpenseChartData || ExpenseChartData.length === 0) {
+    return (
+      <Card className="flex flex-col">
+        <CardHeader className="items-center pb-0">
+          <CardTitle >
+            Expanse by Category
+          </CardTitle>
+          <CardDescription></CardDescription>
+        </CardHeader>
+        <CardContent className="flex-1 pb-0">
+          <div className="text-center text-gray-500 py-8">
+          No expense data available.
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">

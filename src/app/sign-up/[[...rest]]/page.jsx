@@ -10,7 +10,7 @@ export default function SignUpPage() {
     >
       <div className="bg-gray-200 rounded-xl">
         <SignUp 
-          redirectUrl="/dashboard"
+          redirectUrl="/"
           signInUrl="/sign-in"
           appearance={{
             layout: "fullscreen",

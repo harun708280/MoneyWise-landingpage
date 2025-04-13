@@ -45,10 +45,10 @@ const SavingChart=({savings})=> {
       <Card>
         <CardHeader>
           <CardTitle>Savings Chart</CardTitle>
-          <CardDescription>No savings data available.</CardDescription>
+          
         </CardHeader>
         <CardContent>
-          <p>No savings data to display.</p>
+          <p className="text-center">No savings data available.</p>
         </CardContent>
       </Card>
     );

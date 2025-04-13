@@ -14,7 +14,7 @@ export default function Page() {
       {/* hay */}
       <div className="bg-gray-200 rounded-xl">
         <SignIn
-          redirectUrl="/dashboard" 
+          redirectUrl="/" 
           signUpUrl="/sign-up"
           appearance={{
             layout: "fullscreen",

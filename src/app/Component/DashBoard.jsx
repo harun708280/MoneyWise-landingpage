@@ -5,24 +5,25 @@ import React from "react";
 
 const DashBoard = () => {
   return (
-    <div className="relative flex justify-center items-center  w-full">
+    <div className="relative flex justify-center items-center w-full ">
       {/* Background Blur Effect */}
       <div className="absolute top-1/2 left-1/2 -z-10 w-3/4 h-3/4 -translate-x-1/2 -translate-y-1/2 blur-[10rem] gradient opacity-50"></div>
 
       {/* Image Container */}
       <ContainerScroll>
-      <div className="p-4  w-full max-w-7xl bg-opacity-50 backdrop-blur-3xl rounded-2xl shadow-xl">
-        <Image
-          src="/mainDash.png"
-          alt="Dashboard Banner"
-          height={1000}
-          width={1400}
-          className="mx-auto rounded-2xl  object-cover h-full object-left-top"
-        />
+        <div className="p-4 w-full max-w-7xl bg-opacity-50 backdrop-blur-3xl rounded-2xl shadow-xl">
+          <Image
+            src="/mainDash.png"
+            alt="Dashboard Banner"
+            layout="responsive" // Make the image responsive
+            width={1400} // Original width of the image
+            height={1000} // Original height of the image
+            className="mx-auto rounded-2xl object-cover object-left-top"
+          />
 
-        {/* BorderBeam Effect */}
-        <BorderBeam size={250} duration={12} delay={9} />
-      </div>
+          {/* BorderBeam Effect */}
+          <BorderBeam size={250} duration={12} delay={9} />
+        </div>
       </ContainerScroll>
     </div>
   );

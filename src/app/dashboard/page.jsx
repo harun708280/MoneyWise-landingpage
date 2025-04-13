@@ -44,6 +44,7 @@ import DailyCost from "./component/DailyCost";
 import useUserByEmail from "@/hooks/user";
 import { useIncomeByEmailAndTotalQuery } from "@/redux/Api/transaction";
 import Loading from "./transactions/loading";
+import Link from "next/link";
 
 const categories = {
   expense: [
@@ -113,15 +114,13 @@ const MainDashboard = () => {
       walletTotal,
     } = incomeData;
 
-    console.log(
-      incomeData
-    );
+    console.log(incomeData);
   }
 
   return (
     <div className="p-4 md:p-8">
-      <div className="flex gap-8">
-        <div className="max-w-[65%] w-full bg-white p-4 shadow-lg rounded-md">
+      <div className="flex flex-col lg:flex-row gap-8">
+        <div className="lg:max-w-[65%] w-full bg-white p-4 shadow-lg rounded-md">
           <h1 className="text-3xl text-gray-900 font-bold mb-6 ">Overview</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
             <Card className="bg-indigo-600 text-white">
@@ -254,116 +253,153 @@ const MainDashboard = () => {
           </div>
         </div>
 
-        <div className="grid w-[35%] bg-white grid-cols-1  gap-4 p-4 rounded-md shadow-lg">
+        <div className="lg:w-[35%] w-full bg-white p-4 rounded-md shadow-lg">
           <div className="lg:col-span-1">
-            <h2 className="text-2xl font-bold text-gray-900 not-last-of-type:font-bold  flex justify-between items-center">
+            <h2 className="text-2xl font-bold text-gray-900 not-last-of-type:font-bold flex justify-between items-center">
               Saving Plan
-              <Button variant="link" className="text-sm text-blue-500">
-                See All
-              </Button>
+              <Link href="/dashboard/savings">
+                <Button variant="link" className="text-sm text-blue-500">
+                  See All
+                </Button>
+              </Link>
             </h2>
             <div className="border-b-2 border-gray-300 py-4"></div>
-            {savingPlans.map((plan, index) => {
-              const targetDate = plan?.endDate
-                ? new Date(plan.endDate).toLocaleDateString()
-                : "N/A";
+            {savingPlans && savingPlans.length > 0 ? (
+              savingPlans.map((plan, index) => {
+                const targetDate = plan?.endDate
+                  ? new Date(plan.endDate).toLocaleDateString()
+                  : "N/A";
 
-              return (
-                <div key={index} className="mb-4 p-4 text-gray-900 ">
-                  <div className="">
-                    <div className="flex justify-between items-center mb-2">
-                      <h3 className="font-semibold">{plan?.category}</h3>
-                      <p className="text-sm text-gray-500">
-                        Target: {targetDate}
+                return (
+                  <div key={index} className="mb-4 p-4 text-gray-900 ">
+                    <div className="">
+                      <div className="flex justify-between items-center mb-2">
+                        <h3 className="font-semibold">{plan?.category}</h3>
+                        <p className="text-sm text-gray-500">
+                          Target: {targetDate}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div className="text-lg font-bold">
+                        ${plan?.currentAmount}
+                        <span className="text-[12px] text-gray-500">
+                          /${plan?.targetAmount}
+                        </span>
+                      </div>
+                      <p className="text-sm">
+                        {plan?.targetAmount > 0
+                          ? (
+                              (plan?.currentAmount / plan?.targetAmount) *
+                              100
+                            ).toFixed(2)
+                          : 0}
+                        %
                       </p>
                     </div>
-                  </div>
-                  <div className="flex justify-between">
-                    <div className="text-lg font-bold">
-                      ${plan?.currentAmount}
-                      <span className="text-[12px] text-gray-500">
-                        /${plan?.targetAmount}
-                      </span>
-                    </div>
-                    <p className="text-sm">
-                      {plan?.targetAmount > 0
-                        ? ((plan?.currentAmount / plan?.targetAmount) * 100).toFixed(2)
-                        : 0}
-                      %
-                    </p>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <div className="w-full mt-4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                      <div
-                        className={`h-2.5 rounded-full ${
-                          plan?.category === "Emergency Fund"
-                            ? "bg-green-500"
-                            : plan?.category === "Home/Car"
-                            ? "bg-purple-500"
-                            : plan?.category === "Education"
-                            ? "bg-yellow-500"
-                            : "bg-blue-500"
-                        }`}
-                        style={{
-                          width:
-                            plan?.targetAmount > 0
-                              ? `${((plan?.currentAmount / plan?.targetAmount) * 100).toFixed(2)}%`
-                              : "0%",
-                        }}
-                      ></div>
+                    <div className="flex justify-between items-center">
+                      <div className="w-full mt-4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div
+                          className={`h-2.5 rounded-full ${
+                            plan?.category === "Emergency Fund"
+                              ? "bg-green-500"
+                              : plan?.category === "Home/Car"
+                              ? "bg-purple-500"
+                              : plan?.category === "Education"
+                              ? "bg-yellow-500"
+                              : "bg-blue-500"
+                          }`}
+                          style={{
+                            width:
+                              plan?.targetAmount > 0
+                                ? `${(
+                                    (plan?.currentAmount / plan?.targetAmount) *
+                                    100
+                                  ).toFixed(2)}%`
+                                : "0%",
+                          }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : (
+              <p className="text-gray-500 text-center">
+                No saving plans available.
+              </p>
+            )}
           </div>
         </div>
       </div>
-      <div className="flex gap-8 mt-20 ">
-        <div className="max-w-[65%] w-full ">
-          <DailyCost  incomes={incomeData?.incomes} expenses={incomeData?.expenses} />
+      <div className="flex flex-col lg:flex-row gap-8 mt-20">
+        <div className="lg:max-w-[65%] w-full">
+          <DailyCost
+            incomes={incomeData?.incomes}
+            expenses={incomeData?.expenses}
+          />
         </div>
-        <div className="w-[35%] border p-4 shadow-lg rounded-md">
+        <div className="lg:w-[35%] w-full border p-4 shadow-lg rounded-md">
           <h2 className="text-2xl font-bold text-gray-900 flex justify-between items-center">
             Recent Transaction
+            
+            <Link href='/dashboard/transactions'>
             <Button variant="link" className="text-sm text-blue-500">
               See All
             </Button>
+            </Link>
+
           </h2>
           <div className="border-b-2 border-gray-300 my-4"></div>
-          {incomeData?.transactions?.slice(0, 4).map((transaction, index) => {
-            const categoryType = transaction.type === "expense" ? "expense" : "income";
-            const categoryInfo = categories[categoryType]?.find(
-              (cat) => cat.name === transaction.category
-            );
+          {incomeData?.transactions && incomeData.transactions.length > 0 ? (
+            incomeData.transactions.slice(0, 4).map((transaction, index) => {
+              const categoryType =
+                transaction.type === "expense" ? "expense" : "income";
+              const categoryInfo = categories[categoryType]?.find(
+                (cat) => cat.name === transaction.category
+              );
 
-            return (
-              <div
-                key={index}
-                className="flex justify-between items-center mb-10"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="rounded-full bg-gray-200 p-2">
-                    {categoryInfo?.icon}
+              return (
+                <div
+                  key={index}
+                  className="flex justify-between items-center mb-10"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-full bg-gray-200 p-2">
+                      {categoryInfo?.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-900">
+                        {transaction?.category}
+                        <span
+                          className={`text-sm ml-2 mb-1 px-1 rounded-full pb-1 text-white font-medium ${
+                            transaction.type === "income"
+                              ? "bg-amber-400"
+                              : "bg-red-500 "
+                          }`}
+                        >
+                          {transaction.type}
+                        </span>
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        {new Date(transaction?.date).toLocaleDateString()}
+                      </p>
+                    </div>
                   </div>
                   <div>
-                    <h3 className="font-bold  text-gray-900">
-                      {transaction?.category} <span className={`text-sm px-1 rounded-full pb-1 text-white font-medium ${transaction.type==='income'?'bg-amber-400':'bg-red-500 '}`}>{transaction.type}</span>
+                    <h3 className="font-semibold text-gray-900">
+                      ${transaction?.amount}
                     </h3>
-                    <p className="text-sm text-gray-500">
-                      {new Date(transaction?.date).toLocaleDateString()}
-                    </p>
+                    <p className="text-sm text-green-500">Complete</p>
                   </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">
-                    ${transaction?.amount}
-                  </h3>
-                  <p className="text-sm text-green-500">Complete</p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <p className="text-gray-500 text-center">
+              No recent transactions available.
+            </p>
+          )}
         </div>
       </div>
     </div>

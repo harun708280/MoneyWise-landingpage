@@ -9,10 +9,10 @@ const Hero = () => {
    
      <div className="flex flex-col items-center mt-8 max-w-4xl w-11/12 md:w-full">
         <Container>
-      <h1 className="text-4xl md:text-6xl lg:text-6xl md:!leading-snug font-bold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
+      <h1 className="text-xl md:text-6xl lg:text-6xl md:!leading-snug font-bold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
       Simplify Your Finances with Our Intuitive Platform
       </h1>
-      <p className="text-base text-gray-300 md:text-lg  mt-6 text-center">
+      <p className="text-base text-gray-300 md:text-lg  mt-3 md:mt-6 text-center">
       Take control of your financial future.  Effortlessly manage your money, track spending, and achieve your financial goals with our powerful and easy-to-use tools.
       </p>
       <div className="hidden md:flex relative items-center justify-center mt-8 md:mt-12 w-full">

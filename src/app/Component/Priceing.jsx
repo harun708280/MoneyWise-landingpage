@@ -48,13 +48,13 @@ const pricingPlans = [
 
 const PricingSection = () => {
   return (
-    <section className="w-full py-16 relative text-white">
+    <section className="w-full md:py-16 relative text-white">
       <Container>
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-start md:text-center">
           <span className=" text-gray-300 px-3 py-1 rounded-md text-sm uppercase">
             <SectionBadge title="Pricing" />
           </span>
-          <h2 className="text-3xl lg:text-4xl font-bold mt-6">
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mt-6">
           Choose the Right Plan for Your Finances
           </h2>
           <p className="text-gray-400 mt-6 max-w-2xl mx-auto">

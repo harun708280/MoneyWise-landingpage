@@ -19,14 +19,7 @@ import SyncUser from "@/hooks/SyncUser";
 import { redirect } from "next/navigation";
 
 export default function DashboardLayout({ children }) {
-  const { user, isSignedIn } = useUser()
-
   
-
-  if (!isSignedIn) {
-    redirect("/sign-in"); 
-  }
-
   return (
     <div className=" h-screen bg-gray-50 " suppressHydrationWarning>
       <ThemeProvider

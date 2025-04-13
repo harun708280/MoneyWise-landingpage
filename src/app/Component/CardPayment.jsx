@@ -5,29 +5,30 @@ import Container from "@/components/global/container";
 import SectionBadge from "@/components/ui/section-badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const CardPayment = () => {
   return (
     <section className="relative">
          <div className="hidden lg:block absolute top-[50%] -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
         
-      <Container className="max-w-7xl py-20">
+      <Container className="max-w-7xl md:py-20">
         <Container>
-          <div className="flex flex-col justify-center items-center py-20">
+          <div className=" text-start md:text-center justify-center items-center md:py-20">
           <SectionBadge title="Card Payments" />
-          <h2 className="text-3xl lg:text-4xl mt-6 font-semibold text-white">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl mt-6 font-semibold text-white">
           Take Control of Your Finances
           </h2>
           </div>
         </Container>
 
-        <div className="flex flex-col md:flex-row items-center gap-12">
+        <div className="flex flex-col md:flex-row items-center  gap-12">
           {/* Text Content */}
-          <div className="md:w-1/2 space-y-6">
-          <h2 className="text-3xl lg:text-4xl mt-6 font-semibold text-white">
+          <div className="md:w-1/2 space-y-3 md:space-y-6">
+          <h2 className="md:text-xl text-lg lg:text-xl mt-6 font-semibold text-white">
             Manage Your Transactions with Ease
           </h2>
-            <p className="text-gray-50 text-xl ">
+            <p className="text-gray-300  ">
               Simplify your payments and gain valuable insights into your
               spending. Our platform allows you to securely pay with your card
               and effortlessly track your transaction history.
@@ -46,12 +47,14 @@ const CardPayment = () => {
                 <span>Easy expense tracking</span>
               </li>
             </ul>
+            <Link href='sign-in'>
             <Button
               variant="default"
               className="bg-gradient-to-r from-blue-900 to-blue-500 text-white"
             >
               Learn More
             </Button>
+            </Link>
           </div>
 
           {/* Image */}

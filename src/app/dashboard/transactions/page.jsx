@@ -67,7 +67,7 @@ export default function TransactionsPage() {
           <h2 className="text-xl font-bold mb-4">Transactions</h2>
 
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-between items-center mb-4">
-            <TabsList className="grid w-1/3 grid-cols-3 bg-gradient-to-r from-blue-900 to-blue-500">
+            <TabsList className="grid w-1/3 md:grid-cols-3 bg-gradient-to-r from-blue-900 to-blue-500">
               <TabsTrigger value="all"className={`${selectedTab==='all'?'text-black ':'text-white'}`}>
                 All Transactions
               </TabsTrigger>

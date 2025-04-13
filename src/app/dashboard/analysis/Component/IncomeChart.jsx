@@ -50,6 +50,19 @@ const IncomeChart = ({
   incomePercentages,
   IncomeChartData,
 }) => {
+  if (!IncomeChartData || IncomeChartData.length === 0) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Income by Category</CardTitle>
+          
+        </CardHeader>
+        <CardContent>
+          <p className="text-center">No savings data available.</p>
+        </CardContent>
+      </Card>
+    );
+  }
   
 
   return (

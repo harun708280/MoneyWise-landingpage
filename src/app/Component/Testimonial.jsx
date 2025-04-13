@@ -41,14 +41,14 @@ const columns = [
 
 const Testimonial = () => {
   return (
-    <div className="flex flex-col items-center justify-center py-16 relative">
+    <div className="flex flex-col items-center justify-center py-10 md:py-16 relative">
          <div className="hidden lg:block absolute bottom-0 -left-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
          <div className="hidden lg:block absolute top-[20%] -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
       {/* Section Header */}
       <Container>
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-2xl mx-auto text-start md:text-center">
           <SectionBadge title="Testimonials" />
-          <h2 className="text-3xl lg:text-4xl font-semibold mt-4">
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-semibold mt-4">
             What People Are Saying
           </h2>
           <p className="text-muted-foreground mt-4">

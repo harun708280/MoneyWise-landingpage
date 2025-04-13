@@ -5,14 +5,14 @@ import React from "react";
 
 const Feature = () => {
   return (
-    <div className="max-w-7xl py-16 relative">
+    <div className="max-w-7xl py-10 md:py-16 relative">
       <div className="hidden lg:block absolute bottom-0 -left-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
       <div className="hidden lg:block absolute top-[20%] -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
         
       <Container>
-        <div className="text-center mb-12">
+        <div className="text-start md:text-center mb-12">
           <SectionBadge title="FEATURES" />
-          <h2 className="text-3xl font-bold text-white mt-4">
+          <h2 className="text-xl md:text-3xl font-bold text-white mt-4">
             Money Wise Financial Features
           </h2>
           <p className="text-gray-400 mt-2">
@@ -48,7 +48,7 @@ const Feature = () => {
 
               <div className="flex items-center mb-6  border border-white/10 rounded-lg  p-4">
                 <div className="border border-white/10 rounded-xl p-3 mr-4">
-                  {/* Expense Tracking Icon (আপনি এখানে আপনার আইকন ব্যবহার করতে পারেন) */}
+                
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -88,7 +88,7 @@ const Feature = () => {
               </div>
 
               <div className="mt-8">
-                <h2 className="text-2xl font-bold mb-4">
+                <h2 className="text-xl md:text-2xl font-bold mb-4">
                   Money Wise Financial Features
                 </h2>
                 <p className="text-gray-300">
