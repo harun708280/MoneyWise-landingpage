@@ -15,9 +15,9 @@ const DashBoard = () => {
           <Image
             src="/mainDash.png"
             alt="Dashboard Banner"
-            layout="responsive" // Make the image responsive
-            width={1400} // Original width of the image
-            height={1000} // Original height of the image
+           
+            width={1500} 
+            height={1000} 
             className="mx-auto rounded-2xl object-cover object-left-top"
           />
 

@@ -23,13 +23,13 @@ const Company = () => {
       <div className="w-full overflow-hidden">
         <Marquee speed={50} gradient={true} gradientColor={[0, 0, 0]}>
           {logos.map((logo, index) => (
-            <div key={index} className="mx-4 md:mx-14 flex items-center justify-center"> {/* Updated class */}
+            <div key={index} className="mx-4 md:mx-14 lg:mx-20 flex items-center justify-center"> {/* Updated class */}
               <Image
-                width={150} // Reduced width for smaller screens
-                height={40} // Reduced height for smaller screens
+                width={200} 
+                height={40} 
                 src={logo}
                 alt={`Logo ${index + 1}`}
-                className="h-8 md:h-12 grayscale opacity-75" // Adjusted height
+                className="h-8 md:h-12 grayscale opacity-75" 
               />
             </div>
           ))}

@@ -43,7 +43,7 @@ const AccountAndWallet = () => {
     return <Loading />;
   }
 
-  console.log(incomeData);
+
 
   const profileData = {
     name: "John Doe",

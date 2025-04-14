@@ -96,7 +96,7 @@ const MainDashboard = () => {
     }
   }, [incomeData]);
 
-  console.log(savingPlans);
+ 
 
   if (dataLoading && isLoading) {
     return <Loading />;
@@ -114,7 +114,7 @@ const MainDashboard = () => {
       walletTotal,
     } = incomeData;
 
-    console.log(incomeData);
+    
   }
 
   return (

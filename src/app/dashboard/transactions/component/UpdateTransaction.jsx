@@ -13,7 +13,7 @@ const UpdateTransaction=({setIsOpen,isOpen,txn})=> {
     const [updateTransaction]=useUpdateTransactionMutation()
  
   const activeTab=txn.type
-  console.log(txn);
+  
   
 
  

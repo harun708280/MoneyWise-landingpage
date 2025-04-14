@@ -21,7 +21,7 @@ export default function AddTransaction() {
 
   // Get user email safely
   const userEmail = user?.emailAddresses?.[0]?.emailAddress || null;
-  console.log("User Email:", userEmail);
+ 
 
   // Fetch user data if email is available (avoiding multiple calls)
   const { data: userData, isLoading, isError } = useGetUserByEmailQuery(userEmail, {
@@ -33,7 +33,7 @@ export default function AddTransaction() {
   // Prevent unnecessary re-fetching
   useEffect(() => {
     if (userData) {
-      console.log("Fetched User Data:", userData?.email);
+      
     }
   }, [userData]);
 
@@ -105,7 +105,7 @@ export default function AddTransaction() {
       date: values.date,
     };
 
-    console.log(transactionData);
+   
     
   
     try {
@@ -113,7 +113,7 @@ export default function AddTransaction() {
       setSubmitting(true);
   
       const response = await addTransaction(transactionData).unwrap();
-      console.log("✅ Transaction Added Successfully:", response);
+  
       toast.success("Transaction added successfully!");
       resetForm();
     } catch (err) {

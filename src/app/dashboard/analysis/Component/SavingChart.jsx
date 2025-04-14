@@ -39,7 +39,7 @@ const chartConfig = {
 } 
 
 const SavingChart=({savings})=> {
-  console.log(savings);
+ 
   if (!savings || savings.length === 0) {
     return (
       <Card>

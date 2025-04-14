@@ -46,7 +46,7 @@ const chartConfig = {
 };
 
 const ExpanseChart = ({ ExpenseChartData }) => {
-  console.log(ExpenseChartData);
+ 
 
  
   if (!ExpenseChartData || ExpenseChartData.length === 0) {

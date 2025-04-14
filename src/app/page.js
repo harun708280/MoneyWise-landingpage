@@ -77,7 +77,7 @@ transition-all duration-500 ease-in-out transform hover:scale-105 hover:shadow-y
       <Hero></Hero>
       </div>
       <DashBoard />
-      <Company />
+      
         </div>
       
 

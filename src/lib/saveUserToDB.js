@@ -18,7 +18,7 @@
 //           photo: user.imageUrl,
 //         });
 
-//         console.log("User registration response:", response);
+//        
 
         
 //       } catch (error) {
