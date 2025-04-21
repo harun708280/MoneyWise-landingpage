@@ -1,6 +1,7 @@
 import Container from "@/components/global/container";
 import SectionBadge from "@/components/ui/section-badge";
 import { Bolt } from "lucide-react";
+import { toast, Toaster } from "sonner";
 
 const pricingPlans = [
   {
@@ -55,12 +56,13 @@ const PricingSection = () => {
             <SectionBadge title="Pricing" />
           </span>
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mt-6">
-          Choose the Right Plan for Your Finances
+            Choose the Right Plan for Your Finances
           </h2>
           <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
             Whether you're budgeting solo or managing team finances, find a plan
             that fits your needs and grows with you.
           </p>
+          <Toaster />
         </div>
       </Container>
 
@@ -94,6 +96,12 @@ const PricingSection = () => {
 
               <div className="px-6 pb-6 mt-1">
                 <button
+                  onClick={() =>
+                    toast("🚧 Developer at Work || Still tweaking this awesome plan — hang tight!", {
+                     
+                    })
+                    
+                  }
                   className={`px-4 py-2 w-full rounded-md font-medium transition ${plan.buttonStyle}`}
                 >
                   {plan.buttonText}

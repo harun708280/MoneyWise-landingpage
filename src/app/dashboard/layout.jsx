@@ -9,6 +9,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import { Bell } from "lucide-react";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
+import NotiFication from "../Component/NotiFication";
 
 export default function DashboardLayout({ children }) {
   const { isLoaded, isSignedIn } = useUser();
@@ -44,7 +45,7 @@ export default function DashboardLayout({ children }) {
                     <Separator orientation="vertical" className="mr-2 h-4" />
                   </div>
                   <div className="px-5 py-2 flex bg-white rounded-4xl gap-3 items-center">
-                    <Bell className="text-gray-800 border h-10 w-10 rounded-full p-2" />
+                    <NotiFication/>
                     <UserButton className="border h-10 w-10 rounded-full p-2" />
                   </div>
                 </div>

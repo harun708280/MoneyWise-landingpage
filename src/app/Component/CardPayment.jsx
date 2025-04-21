@@ -47,7 +47,7 @@ const CardPayment = () => {
                 <span>Easy expense tracking</span>
               </li>
             </ul>
-            <Link href='sign-in'>
+            <Link href='/dashboard'>
             <Button
               variant="default"
               className="bg-gradient-to-r from-blue-900 to-blue-500 text-white"

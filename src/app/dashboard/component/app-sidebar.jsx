@@ -90,13 +90,13 @@ export function AppSidebar(props) {
           <div className="px-3 py-2"></div>
           <div className="px-3 py-2 absolute bottom-0">
             <div className="space-y-1">
-              <a
-                href="#"
-                className="group flex items-center space-x-2 rounded-md p-2 text-sm font-medium hover:bg-gray-100"
+              <Link
+                href="/dashboard/help"
+                className="group flex w-full items-center space-x-2 rounded-md p-2 text-sm font-medium hover:bg-gray-100"
               >
                 <HelpCircle className="h-6 w-6 text-blue-800 " />
                 <span>Help</span>
-              </a>
+              </Link>
 
               <SignOutButton>
                 <div className="flex items-center space-x-2 rounded-md p-2 text-sm font-medium hover:bg-gray-100">

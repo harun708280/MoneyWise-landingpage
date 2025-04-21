@@ -7,7 +7,7 @@ const Card = ({ i, icon, number, info, progress, range, targetScale, title }) =>
   const scale = useTransform(progress, range, [1, targetScale]);
 
   return (
-    <div ref={containerRef} className="sticky top-[10%]">
+    <div ref={containerRef} className="sticky top-[20%]">
       <div
         className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 h-auto lg:h-[70vh] overflow-hidden rounded-lg border border-white/10 bg-gray-950 px-4 md:px-6 lg:px-8 py-8 lg:py-[50px]"
         style={{
