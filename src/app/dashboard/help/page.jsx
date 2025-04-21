@@ -35,7 +35,7 @@ const FaqSection = () => {
 
 
   return (
-    <div className="bg-blue-600/6 py-12 rounded-md max-w-4xl mx-auto">
+    <div className="bg-blue-600/6 py-12 mb-12 rounded-md max-w-4xl mx-auto">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-blue-600 mb-8 text-center">
           <HelpCircle className="inline-block mr-2" /> Frequently Asked Questions
