@@ -7,7 +7,7 @@ const DashBoard = () => {
   return (
     <div className="relative flex justify-center items-center w-full ">
       {/* Background Blur Effect */}
-      <div className="absolute top-1/2 left-1/2 -z-10 w-3/4 h-3/4 -translate-x-1/2 -translate-y-1/2 blur-[10rem] gradient opacity-50"></div>
+      
 
       {/* Image Container */}
       <ContainerScroll>

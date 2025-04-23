@@ -1,40 +1,44 @@
 import Container from "@/components/global/container";
 import { Button } from "@/components/ui/button";
+import CommonButton from "@/components/ui/CommonButton";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const Hero = () => {
   return (
-   
-     <div className="flex flex-col items-center mt-8 max-w-4xl w-11/12 md:w-full">
-        <Container>
-      <h1 className="text-xl md:text-6xl lg:text-6xl md:!leading-snug font-bold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
-      Simplify Your Finances with Our Intuitive Platform
-      </h1>
-      <p className="text-base text-gray-300 md:text-lg  mt-3 md:mt-6 text-center">
-      Take control of your financial future.  Effortlessly manage your money, track spending, and achieve your financial goals with our powerful and easy-to-use tools.
-      </p>
-      <div className="hidden md:flex relative items-center justify-center mt-8 md:mt-12 w-full">
-        <Link
-          href="/dashboard"
-          className="flex items-center justify-center w-max rounded-full border-t border-foreground/30 bg-white/20 backdrop-blur-lg px-2 py-1 md:py-2 gap-2 md:gap-8 shadow-3xl shadow-background/40 cursor-pointer select-none"
-        >
-          <p className="text-foreground text-sm text-center md:text-base font-medium pl-4 pr-4 lg:pr-0">
-            ✨ {"  "} Start building your dream website now!
+    <div className="   w-full pb-12">
+      <Container className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="md:w-1/2 text-center md:text-left">
+          <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold text-white md:leading-tight">
+            Simplify Your Financial Management
+          </h1>
+          <p className="text-lg text-gray-600 mt-4 md:mt-6">
+            Take control of your financial future with our intuitive platform. Easily manage your money, track expenses, and achieve your financial goals.
           </p>
-          <Button
-            size="sm"
-            className="rounded-full hidden bg-blue-500 lg:flex border border-foreground/20"
-          >
-            Get Started
-            <ArrowRight className="w-4 h-4 ml-1" />
-          </Button>
-        </Link>
-      </div>
+          <div className="mt-8 md:mt-12">
+          <Link href="/dashboard">
+                  <CommonButton isReversed>
+                    <span className="font-bold"> Go to Dashboard</span>
+                  </CommonButton>
+                </Link>
+          </div>
+        </div>
+        <div className="md:w-1/2  relative">
+          <Image
+            src="/Crypto-Exchange-Solutions-1-svartech.png"
+            alt="Financial Management Illustration"
+            width={800}
+            height={700}
+            className=""
+            priority // Good practice for hero images
+          />
+          <div className="absolute top-1/2 left-1/2 -z-10 w-[150px] h-[150px] -translate-x-1/2 -translate-y-1/2 blur-[10rem] gradient opacity-50"></div>
+          
+        </div>
       </Container>
     </div>
- 
   );
 };
 
