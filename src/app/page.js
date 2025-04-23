@@ -129,7 +129,7 @@ export default function Home() {
       <AnimatePresence>
         {isChatOpen && (
           <motion.div
-            className="fixed bottom-[70px] right-4 rounded-lg p-4 w-[500px] z-50"
+            className="fixed bottom-[70px] w-full md:right-2 lg:right-4 rounded-lg p-4 md:w-[500px] z-50"
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}

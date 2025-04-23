@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <div className="   w-full pb-12">
       <Container className="flex flex-col md:flex-row items-center justify-between gap-8">
-        <div className="md:w-1/2 text-center md:text-left">
+        <div className="md:w-1/2 text-center lg:text-left">
           <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold text-white md:leading-tight">
             Simplify Your Financial Management
           </h1>
