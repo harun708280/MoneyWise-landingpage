@@ -20,7 +20,7 @@ import Image from "next/image";
 const Savings = () => {
   const { user, isSignedIn } = useUser();
   const [isOpen, setIsOpen] = useState(false);
-  const [showTable, setShowTable] = useState(false); // নতুন স্টেট যোগ করা হলো
+  const [showTable, setShowTable] = useState(false); 
 
   const userEmail = user?.emailAddresses?.[0]?.emailAddress || null;
   const {

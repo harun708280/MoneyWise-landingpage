@@ -54,9 +54,7 @@ const UserSavingsForm = ({isOpen, setIsOpen}) => {
     return <Loading />;
   }
 
-  if (isUserError) {
-    return <p className="text-red-500">Error fetching user data.</p>;
-  }
+  
 
   const categories = [
     'Emergency Fund',
