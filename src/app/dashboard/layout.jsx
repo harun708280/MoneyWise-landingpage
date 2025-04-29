@@ -45,7 +45,7 @@ export default function DashboardLayout({ children }) {
                     <Separator orientation="vertical" className="mr-2 h-4" />
                   </div>
                   <div className="px-5 py-2 flex bg-white rounded-4xl gap-3 items-center">
-                    <div className="hidden">
+                    <div className="">
                     <ModeToggle  />
 
                     </div>
