@@ -30,7 +30,7 @@ export default function DashboardLayout({ children }) {
     <div className="h-screen bg-gray-50" suppressHydrationWarning>
       <ThemeProvider
         attribute="class"
-        defaultTheme="system"
+        defaultTheme="light"
         enableSystem
         disableTransitionOnChange
       >
@@ -45,10 +45,7 @@ export default function DashboardLayout({ children }) {
                     <Separator orientation="vertical" className="mr-2 h-4" />
                   </div>
                   <div className="px-5 py-2 flex bg-white rounded-4xl gap-3 items-center">
-                    <div className="">
-                    <ModeToggle  />
-
-                    </div>
+                    
                     
                     <NotiFication/>
                     <UserButton className="border h-10 w-10 rounded-full p-2" />
