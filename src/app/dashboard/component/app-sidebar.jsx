@@ -53,7 +53,7 @@ export function AppSidebar(props) {
             <Link href={"/"}>
               <div className="flex gap-2 items-center text-gray-100 text-xl uppercase font-bold">
                 <Image
-                  src={"/logo.jpg"}
+                  src={"/icon.png"}
                   alt="logo"
                   height={35}
                   width={35}
