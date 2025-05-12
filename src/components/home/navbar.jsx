@@ -66,14 +66,14 @@ const Navbar = () => {
                     Features
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href="#pricing" // Added ID
                     className="hover:text-foreground/80 text-sm font-semibold"
                   >
                     Pricing
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a
                     href="#security" // Added ID

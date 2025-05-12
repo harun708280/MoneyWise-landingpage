@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./component/app-sidebar";
@@ -14,14 +14,12 @@ import NotiFication from "../Component/NotiFication";
 export default function DashboardLayout({ children }) {
   const { isLoaded, isSignedIn } = useUser();
 
-
   useEffect(() => {
     if (isLoaded && !isSignedIn) {
-      redirect('/sign-in');
+      redirect("/sign-in");
     }
   }, [isLoaded, isSignedIn]);
 
-  
   if (!isLoaded) {
     return null;
   }
@@ -45,9 +43,7 @@ export default function DashboardLayout({ children }) {
                     <Separator orientation="vertical" className="mr-2 h-4" />
                   </div>
                   <div className="px-5 py-2 flex bg-white rounded-4xl gap-3 items-center">
-                    
-                    
-                    <NotiFication/>
+                    <NotiFication />
                     <UserButton className="border h-10 w-10 rounded-full p-2" />
                   </div>
                 </div>

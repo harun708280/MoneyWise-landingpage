@@ -101,9 +101,9 @@ export default function Home() {
         <CardPayment />
         <Security />
       </div>
-      <div id="pricing">
+      {/* <div id="pricing">
         <PricingSection />
-      </div>
+      </div> */}
       <div id="support">
         <Testimonial />
         <Launch />
