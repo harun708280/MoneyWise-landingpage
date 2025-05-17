@@ -10,7 +10,7 @@ import Link from "next/link";
 const CardPayment = () => {
   return (
     <section className="relative">
-         <div className="hidden lg:block absolute top-[50%] -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
+         <div className="hidden lg:block absolute top-[50%] -right-1/4 bg-blue-500 w-72 h-72 rounded-full z-20 blur-[14rem]"></div>
         
       <Container className="max-w-7xl md:py-20">
         <Container>

@@ -38,11 +38,11 @@ const Process = () => {
 
   return (
     <div
-      className="flex flex-col items-center w-full max-w-7xl justify-center pt-28 relative"
+      className="flex flex-col  items-center w-full max-w-7xl justify-center pt-28 relative"
       ref={container}
     >
-      <div className="hidden lg:block absolute bottom-0 -left-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
-      <div className="hidden lg:block absolute top-[20%] -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
+      <div className="hidden lg:block absolute bottom-0 -left-[25%] bg-blue-500 w-72 h-72 rounded-full z-20 blur-[14rem]"></div>
+      <div className="hidden lg:block absolute top-[20%] -right-[25%] bg-blue-500 w-72 h-72 rounded-full z-20 blur-[14rem]"></div>
       <Container>
         <div className="max-w-xl mx-auto text-start md:text-center">
           <SectionBadge title="The Process" />

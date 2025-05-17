@@ -5,9 +5,9 @@ import React from "react";
 
 const Feature = () => {
   return (
-    <div className="max-w-7xl pb-10 md:pb-16 relative">
-      <div className="hidden lg:block absolute bottom-0 -left-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
-      <div className="hidden lg:block absolute top-[20%] -right-1/4 bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
+    <div className="max-w-7xl pb-10 md:pb-16 relative ">
+      <div className="hidden lg:block absolute bottom-0 -left-[25%] bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
+      <div className="hidden lg:block absolute top-[20%] -right-[25%] bg-blue-500 w-72 h-72 rounded-full -z-10 blur-[14rem]"></div>
         
       <Container>
         <div className="text-start md:text-center mb-12">

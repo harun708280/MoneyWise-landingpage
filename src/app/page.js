@@ -76,7 +76,7 @@ export default function Home() {
   };
 
   return (
-    <section className="w-full mt-16 relative flex items-center justify-center flex-col px-4 md:px-0 py-8">
+    <section className="w-full mt-16 relative  flex items-center justify-center flex-col px-4 md:px-0 py-8">
       <div className="absolute bg-gray-950 inset-0 linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[linear-gradient(to_right,#161616_1px,transparent_1px),linear-gradient(to_bottom,#161616_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)] -z-10 h-[150vh]" />
 
       <div id="home" className="relative">
@@ -120,7 +120,7 @@ export default function Home() {
             transition={{ duration: 0.2 }}
           >
             <Button onClick={toggleChat} size="icon" className="bg-blue-500 size-12 text-white rounded-full shadow-lg transition duration-300">
-              {!isChatOpen ? <MessageCircle className="size-9" /> : <ArrowDownCircleIcon className="size-9" />}
+              {!isChatOpen ? <BotIcon className="size-9" /> : <ArrowDownCircleIcon className="size-9" />}
             </Button>
           </motion.div>
         )}
@@ -136,17 +136,17 @@ export default function Home() {
             transition={{ duration: 0.2 }}
           >
             <div className="border-2 rounded-lg bg-white">
-              <div className="flex items-center justify-between bg-blue-50 border-b px-4 py-2 rounded-t-lg">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between backdrop-blur-md bg-blue-900 border-b px-4 py-2 rounded-t-lg">
+                <div className="flex items-center  gap-2">
                   <div className="bg-blue-500 text-white p-2 mt-2 rounded-full">
                     <BotIcon className="size-5" />
                   </div>
-                  <div className="text-base sm:text-lg font-semibold text-blue-700">
+                  <div className="text-base sm:text-lg font-semibold text-white">
                     Money Wise AI Assistant
                   </div>
                 </div>
                 <Button variant="ghost" size="icon" onClick={toggleChat}>
-                  <X className="size-5 text-gray-600 hover:text-red-500 transition" />
+                  <X className="size-5 text-white hover:text-red-500 transition" />
                 </Button>
               </div>
 
