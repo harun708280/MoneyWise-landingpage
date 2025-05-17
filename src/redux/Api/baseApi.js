@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  baseQuery: fetchBaseQuery({ baseUrl:'https://moneywise-server-production.up.railway.app/api'}), 
+  baseQuery: fetchBaseQuery({ baseUrl:'https://moneywise-server-fzkt.onrender.com/api'}), 
   tagTypes: ["userTransactions","Saving"],  
   endpoints: () => ({}),
 });
