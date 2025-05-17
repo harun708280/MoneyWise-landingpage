@@ -135,107 +135,131 @@ export default function Home() {
             exit={{ opacity: 0, y: 100 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="border-2 rounded-lg bg-white">
-              <div className="flex items-center justify-between backdrop-blur-md bg-blue-900 border-b px-4 py-2 rounded-t-lg">
-                <div className="flex items-center  gap-2">
-                  <div className="bg-blue-500 text-white p-2 mt-2 rounded-full">
-                    <BotIcon className="size-5" />
-                  </div>
-                  <div className="text-base sm:text-lg font-semibold text-white">
-                    Money Wise AI Assistant
-                  </div>
-                </div>
-                <Button variant="ghost" size="icon" onClick={toggleChat}>
-                  <X className="size-5 text-white hover:text-red-500 transition" />
-                </Button>
-              </div>
+           <div className="border-2 rounded-lg bg-white">
+  <div className="flex items-center justify-between backdrop-blur-md bg-blue-900 border-b px-4 py-2 rounded-t-lg">
+    <div className="flex items-center gap-2">
+      <div className="bg-blue-500 text-white p-2 mt-2 rounded-full">
+        <BotIcon className="size-5" />
+      </div>
+      <div className="text-base sm:text-lg font-semibold text-white">
+        Money Wise AI Assistant
+      </div>
+    </div>
+    <Button variant="ghost" className='hover:bg-blue-500' size="icon" onClick={toggleChat}>
+      <X className="size-5 text-white hover:text-red-500 transition" />
+    </Button>
+  </div>
 
-              <CardContent className="mt-2">
-                <ScrollArea className="h-[350px] pr-4">
-                  <div>
-                    <div className="p-2 mb-2 flex gap-2 rounded-md max-w-xs bg-gray-100 text-black">
-                      <Avatar>
-                        <AvatarImage src="/icon.png" alt="AI" />
-                        <AvatarFallback>AI</AvatarFallback>
-                      </Avatar>
-                      {"Welcome to Money Wise! I'm your virtual assistant. Let me know how I can support your financial journey."}
-                    </div>
+  <CardContent className="mt-2">
+    <ScrollArea className="h-[350px] pr-4">
+      <div>
+        <div className="p-2 mb-2 flex gap-2 rounded-md max-w-xs bg-gray-100 text-black">
+          <Avatar>
+            <AvatarImage src="/icon.png" alt="AI" />
+            <AvatarFallback>AI</AvatarFallback>
+          </Avatar>
+          {"Welcome to Money Wise! I'm your virtual assistant. Let me know how I can support your financial journey."}
+        </div>
 
-                    {messages.map((message, index) => (
-                      <div
-                        key={index}
-                        className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} mb-2`}
-                      >
-                        <div
-                          className={`p-2 rounded-md max-w-xs flex gap-2 ${
-                            message.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-black"
-                          }`}
-                        >
-                          <Avatar>
-                            <AvatarImage src={message.role === "user" ? "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740" : "/icon.png"} />
-                            <AvatarFallback>{message.role === "user" ? "You" : "AI"}</AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <ReactMarkdown
-                              remarkPlugins={[remarkGfm]}
-                              components={{
-                                code({ node, inline, className, children, ...props }) {
-                                  return inline ? (
-                                    <code className="bg-gray-200 rounded-md px-1 py-0.5" {...props}>{children}</code>
-                                  ) : (
-                                    <pre className="bg-gray-200 rounded-md p-4 overflow-auto">
-                                      <code className={className} {...props}>{children}</code>
-                                    </pre>
-                                  );
-                                },
-                                ul: ({ children }) => <ul className="list-disc pl-5">{children}</ul>,
-                                ol: ({ children }) => <ol className="list-decimal pl-5">{children}</ol>,
-                              }}
-                            >
-                              {message.content}
-                            </ReactMarkdown>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                    {isLoading && (
-                      <div className="flex items-center justify-center h-full">
-                        <p className="text-gray-500" onClick={stop}>Loading...</p>
-                      </div>
-                    )}
-                    {error && (
-                      <div className="flex items-center justify-center h-full">
-                        <p className="text-red-500">{typeof error === "string" ? error : JSON.stringify(error)}</p>
-                      </div>
-                    )}
-                  </div>
-                </ScrollArea>
-              </CardContent>
-              <CardFooter className="mt-2 mb-4">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleSubmit(e);
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} mb-2`}
+          >
+            <div
+              className={`p-2 rounded-md max-w-xs flex gap-2 ${
+                message.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-black"
+              }`}
+            >
+              <Avatar>
+                <AvatarImage
+                  src={
+                    message.role === "user"
+                      ? "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740"
+                      : "/icon.png"
+                  }
+                />
+                <AvatarFallback>{message.role === "user" ? "You" : "AI"}</AvatarFallback>
+              </Avatar>
+              <div>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    code({ node, inline, className, children, ...props }) {
+                      return inline ? (
+                        <code className="bg-gray-200 rounded-md px-1 py-0.5" {...props}>
+                          {children}
+                        </code>
+                      ) : (
+                        <pre className="bg-gray-200 rounded-md p-4 overflow-auto">
+                          <code className={className} {...props}>{children}</code>
+                        </pre>
+                      );
+                    },
+                    ul: ({ children }) => <ul className="list-disc pl-5">{children}</ul>,
+                    ol: ({ children }) => <ol className="list-decimal pl-5">{children}</ol>,
                   }}
-                  className="flex w-full items-center space-x-2"
                 >
-                  <Input
-                    value={input}
-                    onChange={handleInputChange}
-                    placeholder="Type your message..."
-                    className="flex-1 text-black"
-                  />
-                  <Button
-                    type="submit"
-                    disabled={isLoading}
-                    size="icon"
-                    className="bg-blue-500 text-white rounded-md size-9 hover:bg-blue-600 transition duration-300"
-                  >
-                    <Send className="size-5" />
-                  </Button>
-                </form>
-              </CardFooter>
+                  {message.content}
+                </ReactMarkdown>
+              </div>
             </div>
+          </div>
+        ))}
+
+        {isLoading && (
+          <div className="flex justify-start mb-2">
+            <div className="p-2 rounded-md max-w-xs flex gap-2 bg-gray-100 text-black">
+              <Avatar>
+                <AvatarImage src="/icon.png" />
+                <AvatarFallback>AI</AvatarFallback>
+              </Avatar>
+              <div className="flex text-lg items-center space-x-1">
+                <span className="animate-bounce [animation-delay:-0.3s]">.</span>
+                <span className="animate-bounce [animation-delay:-0.15s]">.</span>
+                <span className="animate-bounce">.</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <div className="flex items-center justify-center h-full">
+            <p className="text-red-500">
+              {typeof error === "string" ? error : JSON.stringify(error)}
+            </p>
+          </div>
+        )}
+      </div>
+    </ScrollArea>
+  </CardContent>
+
+  <CardFooter className="mt-2 mb-4">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit(e);
+      }}
+      className="flex w-full items-center space-x-2"
+    >
+      <Input
+        value={input}
+        onChange={handleInputChange}
+        placeholder="Type your message..."
+        className="flex-1 text-black"
+      />
+      <Button
+        type="submit"
+        disabled={isLoading}
+        size="icon"
+        className="bg-blue-500 text-white rounded-md size-9 hover:bg-blue-600 transition duration-300"
+      >
+        <Send className="size-5" />
+      </Button>
+    </form>
+  </CardFooter>
+</div>
+
           </motion.div>
         )}
       </AnimatePresence>
