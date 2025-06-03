@@ -1,31 +1,35 @@
 "use client";
-import { Printer, MoreVertical, Edit, Delete, Share } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { useUser } from "@clerk/nextjs";
 import Loader from "@/components/global/Loader";
 import {
   useAllTransactionByEmailQuery,
   useDeleteTransactionMutation,
 } from "@/redux/Api/transaction";
-import { AnimatedModalDemo } from "./component/AnimatedModalDemo";
-import MyModal from "../component/Dialog";
+
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+import {
+  PrinterOutlined,
+  FilePdfOutlined,
+  FileImageOutlined,
+  FileExcelOutlined,
+  MoreOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  ShareAltOutlined,
+} from "@ant-design/icons";
+import { Table, Dropdown, Menu, Button } from "antd";
+
+import { AnimatedModalDemo } from "./component/AnimatedModalDemo";
+import MyModal from "../component/Dialog";
 
 export default function TransactionsPage() {
   const { user, isSignedIn } = useUser();
@@ -51,6 +55,54 @@ export default function TransactionsPage() {
     return <Loader />;
   }
 
+  // CSV Export
+  const exportToCSV = () => {
+    const headers = ["User", "Type", "Amount", "Category", "Note", "Date", "Created At"];
+    const rows = transactions.map(txn => [
+      txn.user,
+      txn.type,
+      `$${txn.amount.toFixed(2)}`,
+      txn.category,
+      txn.note,
+      new Date(txn.date).toLocaleDateString(),
+      new Date(txn.createdAt).toLocaleString(),
+    ]);
+
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers, ...rows].map(e => e.join(",")).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "transactions.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // PDF/PNG Export
+  const exportAsImageOrPDF = async (type = "png") => {
+    const element = document.getElementById("transactions-table");
+    if (!element) return;
+
+    const canvas = await html2canvas(element);
+    if (type === "png") {
+      const link = document.createElement("a");
+      link.download = "transactions.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    } else if (type === "pdf") {
+      const pdf = new jsPDF();
+      const imgData = canvas.toDataURL("image/png");
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("transactions.pdf");
+    }
+  };
+
   const confirmDeleteTransaction = (id) => {
     toast("Are you sure you want to delete this?", {
       duration: 5000,
@@ -74,20 +126,19 @@ export default function TransactionsPage() {
     }
   };
 
-  const handleExportPDF = async () => {
-    const input = document.getElementById("transactions-table");
-    if (!input) return;
-
-    const canvas = await html2canvas(input);
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("l", "pt", "a4");
-    const imgProps = pdf.getImageProperties(imgData);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("transactions.pdf");
-  };
+  const exportMenu = (
+    <Menu>
+      <Menu.Item key="png" icon={<FileImageOutlined />} onClick={() => exportAsImageOrPDF("png")}>
+        Export as PNG
+      </Menu.Item>
+      <Menu.Item key="pdf" icon={<FilePdfOutlined />} onClick={() => exportAsImageOrPDF("pdf")}>
+        Export as PDF
+      </Menu.Item>
+      <Menu.Item key="csv" icon={<FileExcelOutlined />} onClick={exportToCSV}>
+        Export as CSV
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <Tabs defaultValue="all" onValueChange={setSelectedTab}>
@@ -97,39 +148,24 @@ export default function TransactionsPage() {
 
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-between items-center mb-4">
             <TabsList className="grid w-1/3 md:grid-cols-3 bg-gradient-to-r from-blue-900 to-blue-500">
-              <TabsTrigger
-                value="all"
-                className={`${
-                  selectedTab === "all" ? "text-black" : "text-white"
-                }`}
-              >
+              <TabsTrigger value="all" className={selectedTab === "all" ? "text-black" : "text-white"}>
                 All Transactions
               </TabsTrigger>
-              <TabsTrigger
-                value="Income"
-                className={`${
-                  selectedTab === "Income" ? "text-black" : "text-white"
-                }`}
-              >
+              <TabsTrigger value="Income" className={selectedTab === "Income" ? "text-black" : "text-white"}>
                 Income Only
               </TabsTrigger>
-              <TabsTrigger
-                value="Expense"
-                className={`${
-                  selectedTab === "Expense" ? "text-black" : "text-white"
-                }`}
-              >
+              <TabsTrigger value="Expense" className={selectedTab === "Expense" ? "text-black" : "text-white"}>
                 Expense Only
               </TabsTrigger>
             </TabsList>
+
             <div className="flex items-center gap-4">
               <AnimatedModalDemo />
-              <button
-                onClick={handleExportPDF}
-                className="bg-gradient-to-r from-blue-900 to-blue-500 text-white px-4 py-2 rounded-md flex items-center gap-3"
-              >
-                <Printer /> Export
-              </button>
+              <Dropdown overlay={exportMenu} trigger={["hover"]}>
+                <button className="bg-gradient-to-r from-blue-900 to-blue-500 text-white px-4 py-2 rounded-md flex items-center gap-3">
+                  <PrinterOutlined /> Export
+                </button>
+              </Dropdown>
             </div>
           </div>
 
@@ -141,6 +177,7 @@ export default function TransactionsPage() {
               setTnxId={setTnxId}
             />
           </TabsContent>
+
           <TabsContent value="Income">
             <TransactionTable
               transactions={transactions}
@@ -149,6 +186,7 @@ export default function TransactionsPage() {
               setTnxId={setTnxId}
             />
           </TabsContent>
+
           <TabsContent value="Expense">
             <TransactionTable
               transactions={transactions}
@@ -164,83 +202,102 @@ export default function TransactionsPage() {
   );
 }
 
-function TransactionTable({
-  transactions,
-  confirmDeleteTransaction,
-  setIsOpen,
-  setTnxId,
-}) {
+function TransactionTable({ transactions, confirmDeleteTransaction, setIsOpen, setTnxId }) {
   if (!transactions || transactions.length === 0) {
     return (
       <div className="text-center p-4">
-        <p className="text-gray-500">
-          No transactions have been recorded in the system
-        </p>
+        <p className="text-gray-500">No transactions have been recorded in the system</p>
       </div>
     );
   }
+
+  const columns = [
+    {
+      title: "User ID",
+      dataIndex: "user",
+      key: "user",
+    },
+    {
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
+      render: (text) => text.charAt(0).toUpperCase() + text.slice(1),
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+      render: (amount) => `$${amount.toFixed(2)}`,
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
+    },
+    {
+      title: "Note",
+      dataIndex: "note",
+      key: "note",
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+      render: (date) => new Date(date).toLocaleDateString(),
+    },
+    {
+      title: "Created At",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (createdAt) => new Date(createdAt).toLocaleString(),
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_, record) => {
+        const menu = (
+          <Menu>
+            <Menu.Item
+              key="edit"
+              icon={<EditOutlined />}
+              onClick={() => {
+                setIsOpen(true);
+                setTnxId(record._id);
+              }}
+            >
+              Edit
+            </Menu.Item>
+            <Menu.Item
+              key="delete"
+              icon={<DeleteOutlined />}
+              onClick={() => confirmDeleteTransaction(record._id)}
+            >
+              Delete
+            </Menu.Item>
+            <Menu.Item key="share" icon={<ShareAltOutlined />}>
+              Share
+            </Menu.Item>
+          </Menu>
+        );
+
+        return (
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <Button icon={<MoreOutlined />} />
+          </Dropdown>
+        );
+      },
+    },
+  ];
+
   return (
-    <div id="transactions-table" className="overflow-x-auto">
-      <table className="w-full border-collapse border">
-        <thead>
-          <tr className="text-left">
-            <th className="border px-4 py-2">User ID</th>
-            <th className="border px-4 py-2">Type</th>
-            <th className="border px-4 py-2">Amount</th>
-            <th className="border px-4 py-2">Category</th>
-            <th className="border px-4 py-2">Note</th>
-            <th className="border px-4 py-2">Date</th>
-            <th className="border px-4 py-2">Created At</th>
-            <th className="border px-4 py-2">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions?.map((txn, index) => (
-            <tr key={index} className="border">
-              <td className="border px-4 py-2">{txn.user}</td>
-              <td className="border px-4 py-2 capitalize">{txn.type}</td>
-              <td className="border px-4 py-2">${txn.amount.toFixed(2)}</td>
-              <td className="border px-4 py-2">{txn.category}</td>
-              <td className="border px-4 py-2">{txn.note}</td>
-              <td className="border px-4 py-2">
-                {new Date(txn.date).toLocaleDateString()}
-              </td>
-              <td className="border px-4 py-2">
-                {new Date(txn.createdAt).toLocaleString()}
-              </td>
-              <td className="border px-4 py-2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <MoreVertical size={18} />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={() => {
-                        setIsOpen(true);
-                        setTnxId(txn._id);
-                      }}
-                      className="flex items-center cursor-pointer"
-                    >
-                      <Edit className="mr-2 h-4 w-4" /> Edit
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={() => confirmDeleteTransaction(txn._id)}
-                      className="flex items-center cursor-pointer"
-                    >
-                      <Delete className="mr-2 h-4 w-4" /> Delete
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="flex items-center cursor-pointer">
-                      <Share className="mr-2 h-4 w-4" /> Share
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div id="transactions-table">
+      <Table
+        rowKey="_id"
+        columns={columns}
+        dataSource={transactions}
+        pagination={{ pageSize: 10 }}
+        bordered
+      />
     </div>
   );
 }
